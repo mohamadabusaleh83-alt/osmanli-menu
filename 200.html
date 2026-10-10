@@ -84,6 +84,14 @@
       </div>
 
       <div class="header-actions">
+        <button type="button" class="btn-action-header btn-share-header" id="btnShareMenu" title="شارك المنيو مع أحبابك">
+          <i class="fa-solid fa-share-nodes"></i>
+          <span class="btn-text-desktop">شارك المنيو 🔗</span>
+        </button>
+        <button type="button" class="btn-action-header btn-feedback-trigger" onclick="openFeedbackModal()" title="شاركنا رأيك في عصملي">
+          <i class="fa-solid fa-star gold-icon"></i>
+          <span class="btn-text-desktop">شاركنا رأيك ⭐</span>
+        </button>
         <a href="https://www.instagram.com/osmanlipal/" target="_blank" rel="noopener noreferrer" class="btn-insta-header" title="تابعنا على إنستغرام @osmanlipal">
           <i class="fa-brands fa-instagram"></i>
           <span class="btn-text-desktop">@osmanlipal</span>
@@ -1825,6 +1833,27 @@
     </div>
   </main>
 
+  <!-- Section: Private Customer Feedback Banner -->
+  <section class="feedback-banner" id="feedback-banner" aria-label="شاركنا رأيك في عصملي">
+    <div class="container">
+      <div class="feedback-cta-card">
+        <div class="feedback-cta-content">
+          <span class="feedback-cta-badge"><i class="fa-solid fa-star gold-icon"></i> رضاكم هو سر أصالتنا منذ 1854</span>
+          <h2 class="feedback-cta-title">شاركنا رأيك في عصملي ⭐</h2>
+          <p class="feedback-cta-desc">
+            نسعد ونعتز دائماً برأيك وملاحظاتك حول جودة الكنافة، سرعة الخدمة، ومذاق الحلويات. تقييمك سري ومباشر للإدارة للمساهمة في تقديم أفضل تجربة تراثية تليق بكم.
+          </p>
+        </div>
+        <div class="feedback-cta-action">
+          <button type="button" class="btn-feedback-cta" onclick="openFeedbackModal()">
+            <i class="fa-solid fa-comment-dots"></i>
+            <span>أرسل رأيك وتقييمك الآن</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Instagram & Social Showcase Banner -->
   <section class="instagram-banner" id="instagram-section" aria-label="متابعة إنستغرام">
     <div class="container">
@@ -1935,6 +1964,68 @@
       </div>
     </div>
   </footer>
+
+  <!-- ========================================================
+       نافذة تقييم وملاحظات الزبائن (Private Customer Feedback Modal)
+       ======================================================== -->
+  <div class="feedback-modal-overlay" id="feedbackModalOverlay" style="display: none;" onclick="if(event.target === this) closeFeedbackModal();">
+    <div class="feedback-modal-dialog">
+      <div class="feedback-modal-header">
+        <div class="feedback-modal-title-wrap">
+          <i class="fa-solid fa-crown gold-icon"></i>
+          <h3>شاركنا رأيك في عصملي ⭐</h3>
+        </div>
+        <button type="button" class="feedback-close-btn" onclick="closeFeedbackModal()">&times;</button>
+      </div>
+      <form id="feedbackForm" onsubmit="submitFeedbackForm(event)">
+        <div class="feedback-modal-body">
+          <div class="feedback-privacy-note">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>ملاحظاتك سرية وخاصة تماماً وتصل مباشرة إلى إدارة المطعم.</span>
+          </div>
+          
+          <div class="feedback-form-group">
+            <label class="feedback-form-label">تقييمك لتجربتك في عصملي: <span style="color:#ff6b6b;">*</span></label>
+            <div class="star-rating-selector" id="starRatingSelector">
+              <button type="button" class="star-btn active" data-rating="1" title="نجمة واحدة"><i class="fa-solid fa-star"></i></button>
+              <button type="button" class="star-btn active" data-rating="2" title="نجمتان"><i class="fa-solid fa-star"></i></button>
+              <button type="button" class="star-btn active" data-rating="3" title="3 نجوم"><i class="fa-solid fa-star"></i></button>
+              <button type="button" class="star-btn active" data-rating="4" title="4 نجوم"><i class="fa-solid fa-star"></i></button>
+              <button type="button" class="star-btn active" data-rating="5" title="5 نجوم (ممتاز)"><i class="fa-solid fa-star"></i></button>
+            </div>
+            <input type="hidden" id="selectedRating" name="rating" value="5">
+            <span class="rating-text-hint" id="ratingTextHint">ممتاز (5 من 5) ⭐</span>
+          </div>
+
+          <div class="feedback-form-group">
+            <label for="feedbackCustomerName" class="feedback-form-label">اسمك الكريم (اختياري):</label>
+            <input type="text" id="feedbackCustomerName" name="customer_name" class="feedback-input" placeholder="اسمك الكريم (اختياري)">
+          </div>
+
+          <div class="feedback-form-group">
+            <label for="feedbackComment" class="feedback-form-label">ملاحظتك أو رأيك: <span style="color:#ff6b6b;">*</span></label>
+            <textarea id="feedbackComment" name="comment" class="feedback-textarea" rows="4" placeholder="شاركنا رأيك في جودة الكنافة، الخدمة، أو أي مقترح تطوير..." required></textarea>
+          </div>
+
+          <div class="feedback-status-msg" id="feedbackStatusMsg" style="display: none;"></div>
+        </div>
+
+        <div class="feedback-modal-footer">
+          <button type="button" class="btn-cancel-feedback" onclick="closeFeedbackModal()">إلغاء</button>
+          <button type="submit" class="btn-submit-feedback" id="btnSubmitFeedback">
+            <span>إرسال الرأي</span>
+            <i class="fa-solid fa-paper-plane"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- صندوق الإشعارات والتنبيهات السريعة (Toast Notification) -->
+  <div class="toast-notification" id="toastNotification" style="display: none;">
+    <i class="fa-solid fa-circle-check" id="toastIcon"></i>
+    <span id="toastMsg">تمت العملية بنجاح!</span>
+  </div>
 
   <script src="app.js"></script>
 </body>

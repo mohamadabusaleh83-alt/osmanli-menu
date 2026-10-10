@@ -265,18 +265,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       color: #f7e7be;
       text-decoration: underline;
     }
-    .default-creds-hint {
-      margin-top: 20px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px dashed rgba(212, 175, 55, 0.3);
-      padding: 10px;
-      border-radius: 8px;
-      font-size: 0.8rem;
-      color: #8c9e97;
-      text-align: center;
-    }
-    .default-creds-hint strong {
-      color: #d4af37;
+    @media (max-width: 480px) {
+      body {
+        padding: 12px;
+      }
+      .login-container {
+        padding: 25px 18px;
+        border-radius: 16px;
+      }
+      .brand-title {
+        font-size: 1.7rem;
+      }
+      .form-control {
+        font-size: 16px !important;
+        min-height: 48px;
+      }
+      .btn-submit {
+        min-height: 48px;
+        font-size: 1.05rem;
+      }
     }
   </style>
 </head>
@@ -333,11 +340,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <i class="fa-solid fa-arrow-left"></i>
       </button>
     </form>
-
-    <div class="default-creds-hint">
-      🔑 <strong>الحساب الافتراضي للمسؤول:</strong><br>
-      اسم المستخدم: <code>admin</code> | كلمة المرور: <code>admin123</code>
-    </div>
 
     <a href="index.php" class="back-link">
       <i class="fa-solid fa-store" style="margin-left: 5px;"></i>

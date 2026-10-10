@@ -8,6 +8,7 @@ CREATE DATABASE IF NOT EXISTS `osmanli_db` CHARACTER SET utf8mb4 COLLATE utf8mb4
 USE `osmanli_db`;
 
 -- 1. جدول المستخدمين والمشرفين (Users / Admins Table)
+DROP TABLE IF EXISTS `customer_feedback`;
 DROP TABLE IF EXISTS `item_variants`;
 DROP TABLE IF EXISTS `item_addons`;
 DROP TABLE IF EXISTS `menu_items`;
@@ -23,7 +24,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `users` (`username`, `email`, `password_hash`, `role`) VALUES
-('admin', 'admin@osmanli.ps', '$2y$10$xaHaRMX7qaCldTPjcJf2ee2PYGN.NI.1FeeDCNykre.k8HQ.28Ta.', 'admin');
+('admin', 'admin@osmanli.ps', '$2y$10$/hz6GW7tuQ7S88IvgKSEde5l4TgkbIldRG.2T/A2jHHiAmjw8gvm6', 'admin');
 
 -- 2. جدول أصناف المنيو (Menu Items Table)
 CREATE TABLE `menu_items` (
@@ -198,3 +199,15 @@ INSERT INTO `item_addons` (`name`, `price`, `is_available`) VALUES
 ('بوظة فانيلا', 2.00, 1),
 ('بوظة تركية', 5.00, 1),
 ('إضافة نوتيلا', 3.00, 1);
+
+-- 5. جدول تقييمات وملاحظات الزبائن (Customer Feedback Table)
+CREATE TABLE `customer_feedback` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `rating` INT NOT NULL,
+  `comment` TEXT NOT NULL,
+  `customer_name` VARCHAR(150) DEFAULT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `customer_feedback` (`rating`, `comment`, `customer_name`) VALUES
+(5, 'أطيب كنافة ومبرومة في نابلس، طعم السمن البلدي خرافي والخدمة ممتازة جداً!', 'زبون من نابلس');

@@ -298,13 +298,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: admin_menu.php#addons-section");
         exit;
     }
+
+    // 6. حذف ملاحظة/تقييم الزبون (Delete Customer Feedback)
+    elseif ($action === 'delete_feedback') {
+        $fid = intval($_POST['feedback_id'] ?? 0);
+        if ($fid > 0) {
+            $stmt = $pdo->prepare("DELETE FROM customer_feedback WHERE id = ?");
+            $stmt->execute([$fid]);
+            $_SESSION['flash_success'] = "تم حذف ملاحظة الزبون بنجاح.";
+        }
+        header("Location: admin_menu.php#feedback-section");
+        exit;
+    }
 }
 
 // ========================================================
-// جلب الإحصائيات والأصناف والأحجام والإضافات
+// جلب الإحصائيات والأصناف والأحجام والإضافات والتقييمات
 // ========================================================
 
-// 1. الإحصائيات
+// 1. الإحصائيات العامة
 $stats = $pdo->query("SELECT 
     COUNT(*) AS total,
     SUM(CASE WHEN is_available = 1 THEN 1 ELSE 0 END) AS available_count,
@@ -314,6 +326,14 @@ FROM menu_items")->fetch();
 
 $variants_total_count = $pdo->query("SELECT COUNT(*) FROM item_variants")->fetchColumn();
 $addons_total_count = $pdo->query("SELECT COUNT(*) FROM item_addons")->fetchColumn();
+
+// إحصائيات تقييمات وملاحظات الزبائن (Customer Feedback)
+$feedback_stats = $pdo->query("SELECT 
+    COUNT(*) AS total_feedback,
+    COALESCE(AVG(rating), 0) AS avg_rating
+FROM customer_feedback")->fetch();
+
+$feedback_items = $pdo->query("SELECT * FROM customer_feedback ORDER BY created_at DESC")->fetchAll();
 
 // 2. قائمة الأقسام الفريدة بالترتيب المعتمد
 $categories_list = $pdo->query("SELECT category FROM menu_items GROUP BY category ORDER BY MIN(sort_order) ASC, category ASC")->fetchAll(PDO::FETCH_COLUMN);
@@ -1071,15 +1091,207 @@ $addons = $pdo->query("SELECT * FROM item_addons ORDER BY id ASC")->fetchAll();
       to { opacity: 1; transform: translateY(0); }
     }
 
+    /* ========================================================
+       تنسيقات صندوق آراء وملاحظات الزبائن (Feedback Management)
+       ======================================================== */
+    .feedback-mgmt-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-gold);
+      border-radius: 18px;
+      padding: 24px;
+      margin-top: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    .feedback-mgmt-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 22px;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      padding-bottom: 18px;
+    }
+    .section-title-with-badge {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .section-title-with-badge h3 {
+      margin: 0;
+      color: var(--color-gold-bright);
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .badge-private-confidential {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(220, 53, 69, 0.2);
+      border: 1px solid rgba(220, 53, 69, 0.5);
+      color: #ff8b94;
+      font-size: 0.78rem;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-weight: 700;
+    }
+    .feedback-mgmt-sub {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      margin: 5px 0 0 0;
+    }
+    .feedback-kpi-summary {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    .feedback-kpi-box {
+      background: rgba(0,0,0,0.3);
+      border: 1px solid var(--border-gold);
+      border-radius: 12px;
+      padding: 10px 18px;
+      min-width: 130px;
+      text-align: center;
+    }
+    .feedback-kpi-box .kpi-label {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .feedback-kpi-box .avg-num {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--color-gold-bright);
+      font-family: 'Cinzel', serif;
+    }
+    .feedback-kpi-box .avg-max {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .feedback-kpi-box .stars-display {
+      font-size: 0.85rem;
+      margin-top: 2px;
+    }
+    .feedback-kpi-box .kpi-val-count span {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #fff;
+      font-family: 'Cinzel', serif;
+    }
+    .feedback-kpi-box .kpi-val-count small {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-right: 4px;
+    }
+    .star-filled {
+      color: #ffc107;
+    }
+    .star-empty {
+      color: rgba(255,255,255,0.2);
+    }
+    .feedback-stars-row {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 0.95rem;
+    }
+    .feedback-stars-row .rating-digit {
+      margin-right: 6px;
+      font-size: 0.85rem;
+      color: var(--color-gold);
+      font-weight: 700;
+    }
+    .btn-nav-feedback {
+      background: rgba(212, 175, 55, 0.15);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      color: var(--color-gold-bright);
+    }
+    .btn-nav-feedback:hover {
+      background: var(--color-gold);
+      color: #071712;
+    }
+
+    /* ========================================================
+       تحسينات التجاوب مع الهواتف الذكية (Mobile Responsive & Touch)
+       ======================================================== */
+    @media (max-width: 991px) {
+      .admin-nav {
+        padding: 12px 18px;
+      }
+      .dashboard-container {
+        padding: 15px;
+      }
+      .kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+    }
+
     @media (max-width: 768px) {
       .admin-nav {
         flex-direction: column;
-        gap: 15px;
+        gap: 12px;
         text-align: center;
+        padding: 14px 12px;
+      }
+      .admin-brand {
+        flex-direction: column;
+        gap: 6px;
+      }
+      .admin-brand-title {
+        font-size: 1.25rem;
+      }
+      .admin-actions {
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+        gap: 8px;
+      }
+      .btn-nav {
+        min-height: 44px;
+        padding: 8px 14px;
+        font-size: 0.85rem;
+        border-radius: 12px;
+      }
+      .dashboard-container {
+        padding: 10px;
+      }
+      .kpi-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+      .kpi-card {
+        padding: 15px;
       }
       .toolbar-card {
         flex-direction: column;
         align-items: stretch;
+        padding: 14px;
+        gap: 12px;
+      }
+      .toolbar-left {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        gap: 10px;
+      }
+      .search-input-wrap input,
+      .filter-select {
+        width: 100%;
+        min-height: 46px;
+        font-size: 16px !important; /* يمنع التكبير التلقائي في هواتف iPhone */
+      }
+      .btn-add-item {
+        width: 100%;
+        min-height: 48px;
+        justify-content: center;
+        font-size: 1rem;
+        border-radius: 12px;
       }
       .form-row {
         grid-template-columns: 1fr;
@@ -1087,6 +1299,76 @@ $addons = $pdo->query("SELECT * FROM item_addons ORDER BY id ASC")->fetchAll();
       .variant-row {
         flex-direction: column;
         align-items: stretch;
+        gap: 8px;
+      }
+      .variant-row input {
+        min-height: 44px;
+        font-size: 16px !important;
+      }
+      .btn-remove-variant-row {
+        width: 100%;
+        min-height: 40px;
+        border-radius: 8px;
+      }
+      .modal-dialog {
+        width: 96%;
+        max-width: 96vw;
+        margin: 10px auto;
+        border-radius: 14px;
+      }
+      .modal-header {
+        padding: 14px 18px;
+      }
+      .modal-body {
+        padding: 16px 14px;
+      }
+      .modal-form-group input,
+      .modal-form-group select,
+      .modal-form-group textarea {
+        font-size: 16px !important;
+      }
+      .modal-footer {
+        padding: 14px;
+        flex-direction: column-reverse;
+        gap: 10px;
+      }
+      .modal-footer button {
+        width: 100%;
+        min-height: 46px;
+      }
+      .table-card {
+        border-radius: 14px;
+        padding: 10px;
+      }
+      .custom-table th, 
+      .custom-table td {
+        padding: 10px 8px;
+        font-size: 0.86rem;
+      }
+      .btn-action-icon {
+        width: 38px;
+        height: 38px;
+        font-size: 1rem;
+      }
+      .feedback-mgmt-card {
+        padding: 16px 12px;
+        border-radius: 14px;
+      }
+      .feedback-mgmt-header {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .feedback-kpi-summary {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .feedback-kpi-box {
+        flex: 1;
+        min-width: 0;
+        padding: 8px 10px;
+      }
+      .feedback-table td {
+        font-size: 0.85rem;
       }
     }
   </style>
@@ -1110,6 +1392,11 @@ $addons = $pdo->query("SELECT * FROM item_addons ORDER BY id ASC")->fetchAll();
         <i class="fa-solid fa-user-shield" style="color: var(--color-gold);"></i>
         <span>المشرف: <strong><?= htmlspecialchars($_SESSION['username'] ?? 'admin') ?></strong></span>
       </div>
+
+      <a href="#feedback-section" class="btn-nav btn-nav-feedback" title="عرض صندوق آراء وملاحظات الزبائن">
+        <i class="fa-solid fa-comments gold-icon"></i>
+        <span>آراء الزبائن (<?= number_format($feedback_stats['total_feedback'] ?? 0) ?>)</span>
+      </a>
 
       <a href="index.php" target="_blank" class="btn-nav btn-nav-view" title="عرض صفحة المنيو العامة كما يراها الزبائن">
         <i class="fa-solid fa-eye"></i>
@@ -1359,6 +1646,105 @@ $addons = $pdo->query("SELECT * FROM item_addons ORDER BY id ASC")->fetchAll();
             </div>
           </div>
         <?php endforeach; ?>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         صندوق آراء وملاحظات الزبائن الخاص (Private Customer Feedback)
+         ======================================================== -->
+    <section class="feedback-mgmt-card" id="feedback-section">
+      <div class="feedback-mgmt-header">
+        <div class="feedback-mgmt-title-wrap">
+          <div class="section-title-with-badge">
+            <h3><i class="fa-solid fa-comments gold-icon"></i> صندوق آراء وملاحظات الزبائن (Customer Feedback)</h3>
+            <span class="badge-private-confidential"><i class="fa-solid fa-lock"></i> خاص بالإدارة وسري للغاية</span>
+          </div>
+          <p class="feedback-mgmt-sub">ملاحظات وتقييمات سرية واردة مباشرة من زبائن المنيو لمتابعة جودة الأصناف ورضا الزوار.</p>
+        </div>
+
+        <div class="feedback-kpi-summary">
+          <div class="feedback-kpi-box">
+            <span class="kpi-label">متوسط التقييمات</span>
+            <div class="kpi-val-stars">
+              <span class="avg-num"><?= number_format($feedback_stats['avg_rating'] ?? 0, 1) ?></span>
+              <span class="avg-max">/ 5</span>
+              <div class="stars-display">
+                <?php 
+                  $round_rating = round($feedback_stats['avg_rating'] ?? 0);
+                  for ($s = 1; $s <= 5; $s++): 
+                ?>
+                  <i class="fa-solid fa-star <?= $s <= $round_rating ? 'star-filled' : 'star-empty' ?>"></i>
+                <?php endfor; ?>
+              </div>
+            </div>
+          </div>
+
+          <div class="feedback-kpi-box">
+            <span class="kpi-label">إجمالي التقييمات</span>
+            <div class="kpi-val-count">
+              <span><?= number_format($feedback_stats['total_feedback'] ?? 0) ?></span>
+              <small>تقييم</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="custom-table feedback-table">
+          <thead>
+            <tr>
+              <th style="width: 50px;">#</th>
+              <th style="width: 140px;">التاريخ والوقت</th>
+              <th style="width: 150px;">اسم الزبون</th>
+              <th style="width: 130px;">التقييم</th>
+              <th>نص الملاحظة أو الرأي</th>
+              <th style="text-align: center; width: 90px;">إجراء</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php if (empty($feedback_items)): ?>
+              <tr>
+                <td colspan="6" style="text-align: center; padding: 35px; color: var(--text-muted);">
+                  <i class="fa-solid fa-star-half-stroke" style="font-size: 2rem; color: var(--color-gold); display: block; margin-bottom: 8px;"></i>
+                  لا توجد تقييمات أو ملاحظات مسجلة حتى الآن.
+                </td>
+              </tr>
+            <?php else: ?>
+              <?php foreach ($feedback_items as $fb): ?>
+                <tr>
+                  <td style="color: var(--text-muted); font-family: 'Cinzel', serif;"><?= $fb['id'] ?></td>
+                  <td style="font-size: 0.85rem; color: #b3c2be; white-space: nowrap;">
+                    <i class="fa-regular fa-clock" style="margin-left: 4px; color: var(--color-gold);"></i>
+                    <?= date('Y-m-d H:i', strtotime($fb['created_at'])) ?>
+                  </td>
+                  <td>
+                    <strong><?= htmlspecialchars($fb['customer_name'] ?: 'زبون عصملي') ?></strong>
+                  </td>
+                  <td>
+                    <div class="feedback-stars-row" title="<?= $fb['rating'] ?> من 5 نجوم">
+                      <?php for ($star = 1; $star <= 5; $star++): ?>
+                        <i class="fa-solid fa-star <?= $star <= $fb['rating'] ? 'star-filled' : 'star-empty' ?>"></i>
+                      <?php endfor; ?>
+                      <span class="rating-digit">(<?= $fb['rating'] ?>)</span>
+                    </div>
+                  </td>
+                  <td style="line-height: 1.5; color: #f0f5f3; font-size: 0.95rem;">
+                    <?= nl2br(htmlspecialchars($fb['comment'])) ?>
+                  </td>
+                  <td style="text-align: center;">
+                    <form method="POST" action="admin_menu.php" style="display:inline;" onsubmit="return confirm('هل تريد بالتأكيد حذف هذه الملاحظة نهائياً؟');">
+                      <input type="hidden" name="action" value="delete_feedback">
+                      <input type="hidden" name="feedback_id" value="<?= $fb['id'] ?>">
+                      <button type="submit" class="btn-action-icon btn-delete-item" title="حذف الملاحظة">
+                        <i class="fa-solid fa-trash-can"></i>
+                      </button>
+                    </form>
+                  </td>
+                </tr>
+              <?php endforeach; ?>
+            <?php endif; ?>
+          </tbody>
+        </table>
       </div>
     </section>
 
