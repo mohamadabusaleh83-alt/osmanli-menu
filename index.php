@@ -485,10 +485,6 @@ $category_icons = [
               Mohamad Abu Saleh
             </a>
           </span>
-          <a href="https://wa.me/970598600230" target="_blank" rel="noopener noreferrer" class="dev-whatsapp-btn" title="تواصل مباشر عبر واتساب مع المطور">
-            <i class="fa-brands fa-whatsapp"></i>
-            <span>واتساب</span>
-          </a>
         </div>
       </div>
     </div>
