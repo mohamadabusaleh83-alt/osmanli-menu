@@ -4,395 +4,431 @@
         "name": "كنافة ناعمة على الفحم",
         "description": "عجينة ناعمة مخبوزة على الفحم",
         "price": "7.00",
-        "category": "كنافة",
+        "category": "الكنافة",
+        "sort_order": 1,
         "image_url": "images\/knafeh_charcoal.jpg",
         "is_available": 1,
         "created_at": "2026-10-10 13:06:41",
-        "updated_at": "2026-10-10 13:06:41"
+        "updated_at": "2026-10-11 02:32:45"
     },
     {
         "id": 2,
         "name": "كنافة محيرة على الفحم \/ إسطنبولية",
         "description": "",
         "price": "8.00",
-        "category": "كنافة",
+        "category": "الكنافة",
+        "sort_order": 1,
         "image_url": "uploads\/dish_6aca17cc5ae6b_1791629260.jpg",
         "is_available": 1,
         "created_at": "2026-10-10 13:06:41",
-        "updated_at": "2026-10-10 13:47:40"
+        "updated_at": "2026-10-11 02:32:45"
     },
     {
         "id": 3,
         "name": "كنافة مبرومة بالجبنة",
         "description": "كنافة مبرومة محشوة بالجبنة",
         "price": "40.00",
-        "category": "كنافة",
+        "category": "الكنافة",
+        "sort_order": 1,
         "image_url": "uploads\/dish_6aca1552c6b47_1791628626.jpg",
         "is_available": 1,
         "created_at": "2026-10-10 13:06:41",
-        "updated_at": "2026-10-10 13:37:06"
+        "updated_at": "2026-10-11 02:32:45"
     },
     {
         "id": 4,
         "name": "كنافة بالقشطة",
         "description": "عجينة ناعمة \/ خشنة + قشطة فاخرة.",
         "price": "8.00",
-        "category": "كنافة",
+        "category": "الكنافة",
+        "sort_order": 1,
         "image_url": "images\/knafeh_charcoal.jpg",
         "is_available": 1,
         "created_at": "2026-10-10 13:06:41",
-        "updated_at": "2026-10-10 13:06:41"
+        "updated_at": "2026-10-11 02:32:45"
     },
     {
         "id": 5,
         "name": "كنافة دايت",
         "description": "عجينة ناعمة \/ خشنة خفيفة السكر والدهون.",
         "price": "10.00",
-        "category": "كنافة",
+        "category": "الكنافة",
+        "sort_order": 1,
         "image_url": "images\/knafeh_charcoal.jpg",
         "is_available": 1,
         "created_at": "2026-10-10 13:06:41",
-        "updated_at": "2026-10-10 13:06:41"
+        "updated_at": "2026-10-11 02:32:45"
     },
     {
         "id": 6,
         "name": "كنافة البيستاشيو",
         "description": "عجينة ناعمة \/ خشنة + زبدة الفستق الحلبي الفاخرة.",
         "price": "10.00",
-        "category": "كنافة",
-        "image_url": "images\/knafeh-mix-flavours.jpg",
+        "category": "الكنافة",
+        "sort_order": 1,
+        "image_url": "uploads\/dish_6acac8f74b8c8_1791674615.jpg",
         "is_available": 1,
         "created_at": "2026-10-10 13:06:41",
-        "updated_at": "2026-10-10 13:06:41"
+        "updated_at": "2026-10-11 02:32:45"
     },
     {
         "id": 7,
         "name": "كنافة النوتيلا",
         "description": "عجينة ناعمة \/ خشنة + نوتيلا أصلية غنية.",
         "price": "10.00",
-        "category": "كنافة",
-        "image_url": "images\/knafeh-mix-flavours.jpg",
+        "category": "الكنافة",
+        "sort_order": 1,
+        "image_url": "uploads\/dish_6acac8e33d4cf_1791674595.jpg",
         "is_available": 1,
         "created_at": "2026-10-10 13:06:41",
-        "updated_at": "2026-10-10 13:06:41"
+        "updated_at": "2026-10-11 02:32:45"
     },
     {
         "id": 8,
         "name": "كنافة اللوتس",
         "description": "عجينة ناعمة \/ خشنة + زبدة اللوتس.",
         "price": "10.00",
-        "category": "كنافة",
-        "image_url": "images\/knafeh-mix-flavours.jpg",
+        "category": "الكنافة",
+        "sort_order": 1,
+        "image_url": "uploads\/dish_6acac8cfd70e7_1791674575.jpg",
         "is_available": 1,
         "created_at": "2026-10-10 13:06:41",
-        "updated_at": "2026-10-10 13:06:41"
+        "updated_at": "2026-10-11 02:32:45"
     },
     {
         "id": 9,
         "name": "اليوزباشي",
         "description": "عجينة ناعمة \/ خشنة + فستق حلبي مطحون + الجبنة \/ قشطة \/ بوظة.",
         "price": "10.00",
-        "category": "كنافة",
+        "category": "الكنافة",
+        "sort_order": 1,
         "image_url": "images\/knafeh_charcoal.jpg",
         "is_available": 1,
         "created_at": "2026-10-10 13:06:41",
-        "updated_at": "2026-10-10 13:06:41"
+        "updated_at": "2026-10-11 02:32:45"
     },
     {
         "id": 10,
         "name": "عصملية السلطان",
         "description": "عجينة فستق حلبي + قشطة + عجينة ناعمة\/خشنة.",
         "price": "13.00",
-        "category": "كنافة",
+        "category": "الكنافة",
+        "sort_order": 1,
         "image_url": "uploads\/dish_6aca13973e4b7_1791628183.jpg",
         "is_available": 1,
         "created_at": "2026-10-10 13:06:41",
-        "updated_at": "2026-10-10 13:29:43"
+        "updated_at": "2026-10-11 02:32:45"
     },
     {
         "id": 11,
         "name": "عصملية أبو سير",
         "description": "فستق حلبي حب + عجينة ناعمة \/ خشنة + فستق حلبي مطحون + الجبنة \/ قشطة \/ بوظة.",
         "price": "14.00",
-        "category": "كنافة",
+        "category": "الكنافة",
+        "sort_order": 1,
         "image_url": "uploads\/dish_6aca28551e3e0_1791633493.jpg",
         "is_available": 1,
         "created_at": "2026-10-10 13:06:41",
-        "updated_at": "2026-10-10 14:58:13"
+        "updated_at": "2026-10-11 02:32:45"
     },
     {
         "id": 12,
         "name": "فطير بالقشطة (شفايف)",
         "description": "رقائق مورقة ذهبية محشوة بالقشطة الطازجة والقطر المعطر.",
         "price": "7.00",
-        "category": "حلويات شرقية وتركية",
+        "category": "حلويات شرقية وتركية وشامية",
+        "sort_order": 2,
         "image_url": "uploads\/dish_6aca17542b562_1791629140.jpg",
         "is_available": 1,
         "created_at": "2026-10-10 13:06:41",
-        "updated_at": "2026-10-10 13:45:40"
+        "updated_at": "2026-10-11 02:32:45"
     },
     {
         "id": 13,
         "name": "فطير بالجبنة",
         "description": "فطير مورق محشو بالجبنة",
         "price": "7.00",
-        "category": "حلويات شرقية وتركية",
+        "category": "حلويات شرقية وتركية وشامية",
+        "sort_order": 2,
         "image_url": "uploads\/dish_6aca16e659ed8_1791629030.jpg",
         "is_available": 1,
         "created_at": "2026-10-10 13:06:41",
-        "updated_at": "2026-10-10 13:43:50"
+        "updated_at": "2026-10-11 02:32:45"
     },
     {
         "id": 14,
         "name": "كلاج بالجبنة",
         "description": "رولات الكلاج المقرمشة الشهيرة بحشوة الجبنة الفاخرة.",
         "price": "7.00",
-        "category": "حلويات شرقية وتركية",
+        "category": "حلويات شرقية وتركية وشامية",
+        "sort_order": 2,
         "image_url": "images\/kellaj_cheese.jpg",
         "is_available": 1,
         "created_at": "2026-10-10 13:06:41",
-        "updated_at": "2026-10-10 13:06:41"
+        "updated_at": "2026-10-11 02:32:45"
     },
     {
         "id": 15,
         "name": "بسكوت شهرزاد",
         "description": "بسكوت مقرمش خفيف محشو بالقشطة ومغطى بالفستق الحلبي.",
         "price": "7.00",
-        "category": "حلويات شرقية وتركية",
+        "category": "حلويات شرقية وتركية وشامية",
+        "sort_order": 2,
         "image_url": "uploads\/dish_6aca16bf56ac6_1791628991.jpg",
         "is_available": 1,
         "created_at": "2026-10-10 13:06:41",
-        "updated_at": "2026-10-10 13:43:11"
+        "updated_at": "2026-10-11 02:32:45"
     },
     {
         "id": 16,
         "name": "بين النارين",
         "description": "طبقتان من شعيرية الكنافة المحمصة يتوسطهما قلب غني من القشطة الفاخرة.",
         "price": "7.00",
-        "category": "حلويات شرقية وتركية",
+        "category": "حلويات شرقية وتركية وشامية",
+        "sort_order": 2,
         "image_url": "uploads\/dish_6aca169b16986_1791628955.jpg",
         "is_available": 1,
         "created_at": "2026-10-10 13:06:41",
-        "updated_at": "2026-10-10 13:42:35"
+        "updated_at": "2026-10-11 02:32:45"
     },
     {
         "id": 17,
         "name": "خدود الست بالقشطة الطبيعية",
         "description": "حبات دائرية مورقة بالسمن البلدي محشوة بقشطة طبيعية وفستق.",
         "price": "7.00",
-        "category": "حلويات شرقية وتركية",
+        "category": "حلويات شرقية وتركية وشامية",
+        "sort_order": 2,
         "image_url": "uploads\/dish_6aca1677ecfbb_1791628919.jpg",
         "is_available": 1,
         "created_at": "2026-10-10 13:06:41",
-        "updated_at": "2026-10-10 13:41:59"
+        "updated_at": "2026-10-11 02:32:45"
     },
     {
         "id": 18,
         "name": "حلاوة الجبن",
         "description": "لفائف رقائق الجبن والسميد الطرية المحشوة بقشطة فاخرة",
         "price": "8.00",
-        "category": "حلويات شرقية وتركية",
+        "category": "حلويات شرقية وتركية وشامية",
+        "sort_order": 2,
         "image_url": "uploads\/dish_6aca163aa41e9_1791628858.jpg",
         "is_available": 1,
         "created_at": "2026-10-10 13:06:41",
-        "updated_at": "2026-10-10 13:40:58"
+        "updated_at": "2026-10-11 02:32:45"
     },
     {
         "id": 19,
         "name": "مدلوقة بالقشطة",
         "description": "عجينة كنافة ناعمة مطبوخة تعلوها قشطة كثيفة ومكسرات محمصة.",
         "price": "8.00",
-        "category": "حلويات شرقية وتركية",
+        "category": "حلويات شرقية وتركية وشامية",
+        "sort_order": 2,
         "image_url": "uploads\/dish_6aca1619a40de_1791628825.jpg",
         "is_available": 1,
         "created_at": "2026-10-10 13:06:41",
-        "updated_at": "2026-10-10 13:40:25"
+        "updated_at": "2026-10-11 02:32:45"
     },
     {
         "id": 20,
         "name": "أصابع الفستق الحلبي",
         "description": "مبرومة فاخرة محشوة بالفستق الحلبي الأخضر المحمص بدون أي إضافات.",
         "price": "7.00",
-        "category": "حلويات شرقية وتركية",
+        "category": "حلويات شرقية وتركية وشامية",
+        "sort_order": 2,
         "image_url": "uploads\/dish_6aca16017d539_1791628801.jpg",
         "is_available": 1,
         "created_at": "2026-10-10 13:06:41",
-        "updated_at": "2026-10-10 13:40:01"
+        "updated_at": "2026-10-11 02:32:45"
     },
     {
         "id": 21,
         "name": "أصابع الجوز",
         "description": "أصابع بقلاوة مقرمشة محشوة بالجوز البلدي المجروش والمتبل بالقرفة.",
         "price": "7.00",
-        "category": "حلويات شرقية وتركية",
+        "category": "حلويات شرقية وتركية وشامية",
+        "sort_order": 2,
         "image_url": "uploads\/dish_6aca15c992c80_1791628745.jpg",
         "is_available": 1,
         "created_at": "2026-10-10 13:06:41",
-        "updated_at": "2026-10-10 13:39:05"
+        "updated_at": "2026-10-11 02:32:45"
     },
     {
         "id": 22,
         "name": "أصابع قشطة",
         "description": "",
         "price": "10.00",
-        "category": "حلويات شرقية وتركية",
+        "category": "حلويات شرقية وتركية وشامية",
+        "sort_order": 2,
         "image_url": "uploads\/dish_6aca283cdfdc8_1791633468.jpg",
         "is_available": 1,
         "created_at": "2026-10-10 13:06:41",
-        "updated_at": "2026-10-10 15:01:00"
+        "updated_at": "2026-10-11 02:32:45"
     },
     {
         "id": 23,
         "name": "بقلاوة تركية (مثلثات)",
         "description": "مثلثات بقلاوة تركية مورقة غنية بالفستق الحلبي والقشطة.",
         "price": "12.00",
-        "category": "حلويات شرقية وتركية",
+        "category": "حلويات شرقية وتركية وشامية",
+        "sort_order": 2,
         "image_url": "images\/baklava_turkish.jpg",
         "is_available": 1,
         "created_at": "2026-10-10 13:06:41",
-        "updated_at": "2026-10-10 13:06:41"
+        "updated_at": "2026-10-11 02:32:45"
     },
     {
         "id": 24,
         "name": "عش البلبل",
         "description": "أعشاش كنافة مقرمشة محشوة بالنوتيلا أو اللوتس او القشطة",
         "price": "1.00",
-        "category": "حلويات شرقية وتركية",
+        "category": "حلويات شرقية وتركية وشامية",
+        "sort_order": 2,
         "image_url": "uploads\/dish_6aca156cab37a_1791628652.jpg",
         "is_available": 1,
         "created_at": "2026-10-10 13:06:41",
-        "updated_at": "2026-10-10 14:46:45"
+        "updated_at": "2026-10-11 02:32:45"
     },
     {
         "id": 25,
         "name": "تريليتشيا (كيكة الكراميل التركية)",
         "description": "كيكة الحليب والكراميل التركية الإسفنجية المنعشة المشربة بثلاثة أنواع حليب.",
         "price": "10.00",
-        "category": "حلويات شرقية وتركية",
+        "category": "حلويات شرقية وتركية وشامية",
+        "sort_order": 2,
         "image_url": "images\/trilece-cake.jpg",
         "is_available": 1,
         "created_at": "2026-10-10 13:06:41",
-        "updated_at": "2026-10-10 13:06:41"
+        "updated_at": "2026-10-11 02:32:45"
     },
     {
         "id": 26,
         "name": "مشكل حلويات فاخرة",
         "description": "صواني وبوكسات ضيافة مشكلة مختارة من أرقى أصناف الحلويات الشرقية والتركية.",
         "price": "85.00",
-        "category": "حلويات شرقية وتركية",
+        "category": "البوكسات والمشكل",
+        "sort_order": 3,
         "image_url": "uploads\/dish_6aca0ff7526d5_1791627255.jpg",
         "is_available": 1,
         "created_at": "2026-10-10 13:06:41",
-        "updated_at": "2026-10-10 13:14:15"
+        "updated_at": "2026-10-11 02:32:45"
     },
     {
         "id": 27,
         "name": "هريسة بالسمن البلدي",
         "description": "ضيافة شامية فاخرة بالسمن البلدي (\/ 1 كيلو)",
         "price": "25.00",
-        "category": "نثريات ومعمول",
+        "category": "النثريات والإضافات (البوظة، القشطة، النواشف)",
+        "sort_order": 4,
         "image_url": "images\/shahrazad_biscuit.jpg",
         "is_available": 0,
         "created_at": "2026-10-10 13:06:41",
-        "updated_at": "2026-10-10 13:06:41"
+        "updated_at": "2026-10-11 02:32:45"
     },
     {
         "id": 28,
-        "name": "برازق شامية بالسمسم والفستق",
+        "name": "برازق شامية بالسمسم",
         "description": "ضيافة شامية فاخرة بالسمن البلدي (\/ 1 كيلو)",
         "price": "30.00",
-        "category": "نثريات ومعمول",
-        "image_url": "images\/shahrazad_biscuit.jpg",
+        "category": "النثريات والإضافات (البوظة، القشطة، النواشف)",
+        "sort_order": 4,
+        "image_url": "uploads\/dish_6acac91ac6078_1791674650.jpg",
         "is_available": 1,
         "created_at": "2026-10-10 13:06:41",
-        "updated_at": "2026-10-10 13:06:41"
+        "updated_at": "2026-10-11 02:32:45"
     },
     {
         "id": 29,
         "name": "غريبة بالسمن البلدي",
         "description": "ضيافة شامية فاخرة بالسمن البلدي (\/ 1 كيلو)",
         "price": "36.00",
-        "category": "نثريات ومعمول",
-        "image_url": "images\/shahrazad_biscuit.jpg",
+        "category": "النثريات والإضافات (البوظة، القشطة، النواشف)",
+        "sort_order": 4,
+        "image_url": "uploads\/dish_6acac90ad8df5_1791674634.jpg",
         "is_available": 1,
         "created_at": "2026-10-10 13:06:41",
-        "updated_at": "2026-10-10 13:06:41"
+        "updated_at": "2026-10-11 02:32:45"
     },
     {
         "id": 30,
         "name": "غريبة محشية فستق حلبي",
         "description": "ضيافة شامية فاخرة بالسمن البلدي (\/ للقطعة)",
         "price": "5.00",
-        "category": "نثريات ومعمول",
+        "category": "النثريات والإضافات (البوظة، القشطة، النواشف)",
+        "sort_order": 4,
         "image_url": "uploads\/dish_6aca286f82545_1791633519.jpg",
         "is_available": 1,
         "created_at": "2026-10-10 13:06:41",
-        "updated_at": "2026-10-10 14:58:39"
+        "updated_at": "2026-10-11 02:32:45"
     },
     {
         "id": 31,
         "name": "معمول عجوة المدينة الفاخرة",
         "description": "ضيافة شامية فاخرة بالسمن البلدي (\/ 1 كيلو)",
         "price": "40.00",
-        "category": "نثريات ومعمول",
+        "category": "النثريات والإضافات (البوظة، القشطة، النواشف)",
+        "sort_order": 4,
         "image_url": "uploads\/dish_6aca186bec8c8_1791629419.jpg",
         "is_available": 1,
         "created_at": "2026-10-10 13:06:41",
-        "updated_at": "2026-10-10 13:50:19"
+        "updated_at": "2026-10-11 02:32:45"
     },
     {
         "id": 32,
         "name": "معمول جوز",
         "description": "ضيافة شامية فاخرة بالسمن البلدي (\/ 1 كيلو)",
         "price": "55.00",
-        "category": "نثريات ومعمول",
+        "category": "النثريات والإضافات (البوظة، القشطة، النواشف)",
+        "sort_order": 4,
         "image_url": "images\/shahrazad_biscuit.jpg",
         "is_available": 1,
         "created_at": "2026-10-10 13:06:41",
-        "updated_at": "2026-10-10 13:06:41"
+        "updated_at": "2026-10-11 02:32:45"
     },
     {
         "id": 33,
         "name": "معمول فستق حلبي",
         "description": "ضيافة شامية فاخرة بالسمن البلدي (\/ 1 كيلو)",
         "price": "80.00",
-        "category": "نثريات ومعمول",
+        "category": "النثريات والإضافات (البوظة، القشطة، النواشف)",
+        "sort_order": 4,
         "image_url": "uploads\/dish_6aca182e271df_1791629358.jpg",
         "is_available": 1,
         "created_at": "2026-10-10 13:06:41",
-        "updated_at": "2026-10-10 13:49:18"
+        "updated_at": "2026-10-11 02:32:45"
     },
     {
         "id": 34,
         "name": "وربات شامية",
         "description": "",
         "price": "7.00",
-        "category": "حلويات شرقية وتركية",
+        "category": "حلويات شرقية وتركية وشامية",
+        "sort_order": 2,
         "image_url": "uploads\/dish_6aca2823c9061_1791633443.jpg",
         "is_available": 1,
         "created_at": "2026-10-10 14:44:05",
-        "updated_at": "2026-10-10 14:57:23"
+        "updated_at": "2026-10-11 02:32:45"
     },
     {
         "id": 35,
         "name": "جوزية",
         "description": "",
         "price": "7.00",
-        "category": "حلويات شرقية وتركية",
+        "category": "حلويات شرقية وتركية وشامية",
+        "sort_order": 2,
         "image_url": "uploads\/dish_6aca28133bd11_1791633427.jpg",
         "is_available": 1,
         "created_at": "2026-10-10 14:44:56",
-        "updated_at": "2026-10-10 14:57:07"
+        "updated_at": "2026-10-11 02:32:45"
     },
     {
         "id": 36,
         "name": "فطير شهرزاد _ مطبق",
         "description": "",
         "price": "10.00",
-        "category": "حلويات شرقية وتركية",
+        "category": "حلويات شرقية وتركية وشامية",
+        "sort_order": 2,
         "image_url": "uploads\/dish_6aca2803d88de_1791633411.jpg",
         "is_available": 1,
         "created_at": "2026-10-10 14:49:02",
-        "updated_at": "2026-10-10 14:56:51"
+        "updated_at": "2026-10-11 02:32:45"
     }
 ]

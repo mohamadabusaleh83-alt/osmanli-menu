@@ -3,7 +3,7 @@
  * ====================================================================
  * Project: OSMANLI - ABU SEIR 1854 (عصملي) | Digital Restaurant Menu
  * Developer: Mohamad Abu Saleh
- * Phone / WhatsApp: +970598600230 (https://wa.me/970598600230)
+ * Phone / WhatsApp: +972598600230 (https://wa.me/972598600230)
  * Email: mohamadabusaleh83@gmail.com
  * LinkedIn: https://www.linkedin.com/in/mohamad-abu-saleh-598255350
  * ====================================================================
@@ -20,8 +20,8 @@ $db_load_error = null;
 
 try {
     $pdo = getDBConnection();
-    // جلب الأصناف المتوفرة فقط (is_available = 1)
-    $stmt = $pdo->query("SELECT * FROM menu_items WHERE is_available = 1 ORDER BY category ASC, id ASC");
+    // جلب الأصناف المتوفرة فقط مرتبة بحسب ترتيب الأقسام (sort_order ASC, id ASC)
+    $stmt = $pdo->query("SELECT * FROM menu_items WHERE is_available = 1 ORDER BY sort_order ASC, id ASC");
     $db_items = $stmt->fetchAll();
 
     // جلب الأحجام والأسعار لكل صنف
@@ -38,22 +38,55 @@ try {
     $db_load_error = $e->getMessage();
 }
 
-// تجميع الأصناف حسب الأقسام
-$grouped_menu = [];
+// الترتيب الرسمي المعتمد للأقسام
+$categories_order = [
+    'الكنافة',
+    'حلويات شرقية وتركية وشامية',
+    'البوكسات والمشكل',
+    'النثريات والإضافات (البوظة، القشطة، النواشف)'
+];
+
+// تجميع الأصناف أولاً
+$raw_grouped = [];
 foreach ($db_items as $item) {
     $cat = $item['category'];
-    if (!isset($grouped_menu[$cat])) {
-        $grouped_menu[$cat] = [];
+    if (!isset($raw_grouped[$cat])) {
+        $raw_grouped[$cat] = [];
     }
-    $grouped_menu[$cat][] = $item;
+    $raw_grouped[$cat][] = $item;
 }
 
-// أيقونات الأقسام الافتراضية
+// بناء مصفوفة العرض بحسب التسلسل الدقيق المطلوب
+$grouped_menu = [];
+foreach ($categories_order as $cat_name) {
+    if (isset($raw_grouped[$cat_name])) {
+        $grouped_menu[$cat_name] = $raw_grouped[$cat_name];
+        unset($raw_grouped[$cat_name]);
+    }
+}
+// إضافة أي أقسام أخرى إن وجدت
+foreach ($raw_grouped as $cat_name => $items) {
+    $grouped_menu[$cat_name] = $items;
+}
+
+// أيقونات الأقسام المعتمدة
 $category_icons = [
+    'الكنافة' => 'fa-fire-burner',
+    'حلويات شرقية وتركية وشامية' => 'fa-gem',
+    'البوكسات والمشكل' => 'fa-box-open',
+    'النثريات والإضافات (البوظة، القشطة، النواشف)' => 'fa-ice-cream',
     'كنافة' => 'fa-fire-burner',
     'حلويات شرقية وتركية' => 'fa-gem',
     'نثريات ومعمول' => 'fa-box-archive',
     'مشروبات' => 'fa-bottle-water',
+];
+
+// وصف فرعي لكل قسم
+$category_subtitles = [
+    'الكنافة' => 'أصالة الكنافة النابلسية بالسمن البلدي والجبنة البلدية الفاخرة على جمر الفحم',
+    'حلويات شرقية وتركية وشامية' => 'تشكيلة الحلويات التراثية والتركية الفاخرة بأجود المكونات',
+    'البوكسات والمشكل' => 'تشكيلات مشكلة وهدايا فاخرة لكافة المناسبات والزيارات',
+    'النثريات والإضافات (البوظة، القشطة، النواشف)' => 'معمول العيد، بوظة فاخرة، قشطة بلدية ونواشف طازجة',
 ];
 ?>
 <!DOCTYPE html>
@@ -119,7 +152,7 @@ $category_icons = [
       <div class="announcement-right">
         <span class="hours-badge"><i class="fa-regular fa-clock"></i> 11:00 صباحاً – 12:00 منتصف الليل</span>
         <a href="tel:0598001608" class="contact-pill" title="اتصال هاتفي مباشر"><i class="fa-solid fa-phone"></i> <span dir="ltr">0598001608</span></a>
-        <a href="https://wa.me/970598001608" target="_blank" rel="noopener noreferrer" class="contact-pill whatsapp-pill" title="محادثة واتساب"><i class="fa-brands fa-whatsapp"></i> واتساب</a>
+        <a href="https://wa.me/972598001608" target="_blank" rel="noopener noreferrer" class="contact-pill whatsapp-pill" title="محادثة واتساب"><i class="fa-brands fa-whatsapp"></i> واتساب</a>
       </div>
     </div>
   </aside>
@@ -260,7 +293,7 @@ $category_icons = [
                 <i class="fa-solid <?= $icon ?> section-icon"></i>
                 <div>
                   <h2 class="section-title"><?= htmlspecialchars($category_name) ?></h2>
-                  <span class="section-subtitle">تشكيلة عصملي أبو سير 1854 الفاخرة</span>
+                  <span class="section-subtitle"><?= htmlspecialchars($category_subtitles[$category_name] ?? 'تشكيلة عصملي أبو سير 1854 الفاخرة') ?></span>
                 </div>
               </div>
               <span class="section-counter"><?= $count ?> صنفاً</span>
@@ -397,7 +430,7 @@ $category_icons = [
               <i class="fa-brands fa-instagram"></i>
               <span>تابعنا على إنستغرام (@osmanlipal)</span>
             </a>
-            <a href="https://wa.me/970598001608" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-cta">
+            <a href="https://wa.me/972598001608" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-cta">
               <i class="fa-brands fa-whatsapp"></i>
               <span>تواصل عبر الواتساب (<span dir="ltr">0598001608</span>)</span>
             </a>
@@ -446,7 +479,7 @@ $category_icons = [
         <h4>الدوام ومعلومات التواصل</h4>
         <p><i class="fa-regular fa-clock gold-icon"></i> <strong>ساعات الدوام:</strong> 11:00 صباحاً – 12:00 منتصف الليل <span dir="ltr">(11:00 AM - 12:00 AM)</span></p>
         <p><i class="fa-solid fa-phone gold-icon"></i> <strong>الاتصال المباشر:</strong> <a href="tel:0598001608" class="footer-link" dir="ltr">0598001608</a></p>
-        <p><i class="fa-brands fa-whatsapp gold-icon"></i> <strong>الواتساب:</strong> <a href="https://wa.me/970598001608" target="_blank" rel="noopener noreferrer" class="footer-link" dir="ltr">0598001608</a></p>
+        <p><i class="fa-brands fa-whatsapp gold-icon"></i> <strong>الواتساب:</strong> <a href="https://wa.me/972598001608" target="_blank" rel="noopener noreferrer" class="footer-link" dir="ltr">0598001608</a></p>
         <p><i class="fa-brands fa-instagram gold-icon"></i> <strong>إنستغرام:</strong> <a href="https://www.instagram.com/osmanlipal/" target="_blank" rel="noopener noreferrer" class="footer-link" dir="ltr">@osmanlipal</a></p>
       </div>
 

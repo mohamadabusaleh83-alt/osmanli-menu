@@ -100,6 +100,6 @@ php -S 127.0.0.1:8888
 * **الاسم (Developer):** محمد أبو صالح | Mohamad Abu Saleh
 * **LinkedIn:** [https://www.linkedin.com/in/mohamad-abu-saleh-598255350](https://www.linkedin.com/in/mohamad-abu-saleh-598255350)
 * **Email:** [mohamadabusaleh83@gmail.com](mailto:mohamadabusaleh83@gmail.com)
-* **WhatsApp / Phone:** [+970598600230](https://wa.me/970598600230)
+* **WhatsApp / Phone:** [+972598600230](https://wa.me/972598600230)
 
 

@@ -22,6 +22,17 @@ if (isset($_SESSION['flash_error'])) {
     unset($_SESSION['flash_error']);
 }
 
+// دالة مساعدة لتحديد ترتيب القسم
+function getCategorySortOrder($category): int {
+    $map = [
+        'الكنافة' => 1,
+        'حلويات شرقية وتركية وشامية' => 2,
+        'البوكسات والمشكل' => 3,
+        'النثريات والإضافات (البوظة، القشطة، النواشف)' => 4
+    ];
+    return $map[$category] ?? 1;
+}
+
 // دالة مساعدة لرفع الصور والتحقق منها
 function handleImageUpload($file, $existingPath = null) {
     if (!isset($file) || $file['error'] === UPLOAD_ERR_NO_FILE) {
@@ -131,9 +142,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 $pdo->beginTransaction();
 
-                // إضافة الصنف في جدول menu_items
-                $stmt = $pdo->prepare("INSERT INTO menu_items (name, description, price, category, image_url, is_available) VALUES (?, ?, ?, ?, ?, ?)");
-                $stmt->execute([$name, $description, $base_price, $category, $image_url, $is_available]);
+                $sort_order = getCategorySortOrder($category);
+
+                // إضافة الصنف في جدول menu_items مع ترتيب القسم
+                $stmt = $pdo->prepare("INSERT INTO menu_items (name, description, price, category, sort_order, image_url, is_available) VALUES (?, ?, ?, ?, ?, ?, ?)");
+                $stmt->execute([$name, $description, $base_price, $category, $sort_order, $image_url, $is_available]);
                 $new_item_id = $pdo->lastInsertId();
 
                 // إضافة الأحجام والأسعار في جدول item_variants
@@ -180,9 +193,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 $pdo->beginTransaction();
 
-                // تحديث بيانات الصنف الأساسية
-                $stmt = $pdo->prepare("UPDATE menu_items SET name = ?, description = ?, price = ?, category = ?, image_url = ?, is_available = ? WHERE id = ?");
-                $stmt->execute([$name, $description, $base_price, $category, $image_url, $is_available, $id]);
+                $sort_order = getCategorySortOrder($category);
+
+                // تحديث بيانات الصنف الأساسية وترتيبه
+                $stmt = $pdo->prepare("UPDATE menu_items SET name = ?, description = ?, price = ?, category = ?, sort_order = ?, image_url = ?, is_available = ? WHERE id = ?");
+                $stmt->execute([$name, $description, $base_price, $category, $sort_order, $image_url, $is_available, $id]);
 
                 // مسح الأحجام القديمة للصنف وإعادة إدخال الأحجام المعدلة
                 $del_var = $pdo->prepare("DELETE FROM item_variants WHERE item_id = ?");
@@ -300,8 +315,8 @@ FROM menu_items")->fetch();
 $variants_total_count = $pdo->query("SELECT COUNT(*) FROM item_variants")->fetchColumn();
 $addons_total_count = $pdo->query("SELECT COUNT(*) FROM item_addons")->fetchColumn();
 
-// 2. قائمة الأقسام الفريدة
-$categories_list = $pdo->query("SELECT DISTINCT category FROM menu_items ORDER BY category ASC")->fetchAll(PDO::FETCH_COLUMN);
+// 2. قائمة الأقسام الفريدة بالترتيب المعتمد
+$categories_list = $pdo->query("SELECT category FROM menu_items GROUP BY category ORDER BY MIN(sort_order) ASC, category ASC")->fetchAll(PDO::FETCH_COLUMN);
 
 // 3. فلترة البيانات
 $filter_category = trim($_GET['category'] ?? '');
@@ -328,7 +343,7 @@ if (!empty($search_query)) {
     $params[] = "%{$search_query}%";
 }
 
-$sql .= " ORDER BY category ASC, id DESC";
+$sql .= " ORDER BY sort_order ASC, id ASC";
 
 $stmt = $pdo->prepare($sql);
 $stmt->execute($params);
@@ -1369,10 +1384,9 @@ $addons = $pdo->query("SELECT * FROM item_addons ORDER BY id ASC")->fetchAll();
             <div class="modal-form-group">
               <label for="add_category">القسم / الفئة <span style="color:#ff6b6b;">*</span></label>
               <select id="add_category" name="category" onchange="toggleCustomCategory(this, 'add_custom_cat_wrap')">
-                <option value="كنافة">كنافة</option>
-                <option value="حلويات شرقية وتركية">حلويات شرقية وتركية</option>
-                <option value="نثريات ومعمول">نثريات ومعمول</option>
-                <option value="مشروبات">مشروبات</option>
+                <?php foreach ($categories_list as $cat): ?>
+                  <option value="<?= htmlspecialchars($cat) ?>"><?= htmlspecialchars($cat) ?></option>
+                <?php endforeach; ?>
                 <option value="__custom__">+ قسم جديد مخصص...</option>
               </select>
             </div>
