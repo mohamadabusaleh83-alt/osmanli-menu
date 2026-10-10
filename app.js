@@ -1,6 +1,11 @@
 /**
- * OSMANLI - ABU SEIR 1854 (عصملي)
- * Showcase Menu Interactions & Scrollspy
+ * ====================================================================
+ * Project: OSMANLI - ABU SEIR 1854 (عصملي) | Digital Restaurant Menu
+ * Developer: Mohamad Abu Saleh
+ * Phone / WhatsApp: +970598600230 (https://wa.me/970598600230)
+ * Email: mohamadabusaleh83@gmail.com
+ * LinkedIn: https://www.linkedin.com/in/mohamad-abu-saleh-598255350
+ * ====================================================================
  */
 
 document.addEventListener("DOMContentLoaded", () => {

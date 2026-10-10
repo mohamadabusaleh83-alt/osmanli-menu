@@ -1,10 +1,14 @@
 <?php
 /**
- * index.php - الواجهة العامة لمنيو عصملي - أبو سير 1854
- * Osmanli Menu Project (1854) - Dynamic Public Digital Menu
+ * ====================================================================
+ * Project: OSMANLI - ABU SEIR 1854 (عصملي) | Digital Restaurant Menu
+ * Developer: Mohamad Abu Saleh
+ * Phone / WhatsApp: +970598600230 (https://wa.me/970598600230)
+ * Email: mohamadabusaleh83@gmail.com
+ * LinkedIn: https://www.linkedin.com/in/mohamad-abu-saleh-598255350
+ * ====================================================================
  * 
- * تجلب هذه الصفحة الأصناف المتاحة (is_available = 1) ديناميكياً من قاعدة البيانات
- * مع حجب أي أزرار تعديل أو حذف عن الزوار العاديين.
+ * index.php - الواجهة العامة لمنيو عصملي - أبو سير 1854
  */
 
 require_once __DIR__ . '/db.php';
@@ -467,8 +471,25 @@ $category_icons = [
     </div>
     
     <div class="footer-bottom">
-      <div class="container">
+      <div class="container footer-bottom-inner">
         <p>© 2026 جميع الحقوق محفوظة لـ <strong>عصملي - OSMANLI (ABU SEIR 1854)</strong> • نابلس - رفيديا - مقابل الأكاديمية</p>
+        <div class="developer-signature">
+          <span class="dev-text">
+            تم التطوير بواسطة 
+            <a href="https://www.linkedin.com/in/mohamad-abu-saleh-598255350" target="_blank" rel="noopener noreferrer" class="dev-link" title="حساب LinkedIn للمطور محمد أبو صالح">
+              <i class="fa-brands fa-linkedin"></i> محمد أبو صالح
+            </a>
+            <span class="dev-sep">|</span>
+            Developed by 
+            <a href="https://www.linkedin.com/in/mohamad-abu-saleh-598255350" target="_blank" rel="noopener noreferrer" class="dev-link" title="LinkedIn Profile: Mohamad Abu Saleh">
+              Mohamad Abu Saleh
+            </a>
+          </span>
+          <a href="https://wa.me/970598600230" target="_blank" rel="noopener noreferrer" class="dev-whatsapp-btn" title="تواصل مباشر عبر واتساب مع المطور">
+            <i class="fa-brands fa-whatsapp"></i>
+            <span>واتساب</span>
+          </a>
+        </div>
       </div>
     </div>
   </footer>

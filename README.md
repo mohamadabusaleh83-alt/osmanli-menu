@@ -92,3 +92,13 @@ php -S 127.0.0.1:8888
 - **بوابة تسجيل دخول المشرفين:** `http://localhost:8888/login.php`
 - **لوحة التحكم وإدارة المنيو:** `http://localhost:8888/admin_menu.php`
 - **سكريبت الإعداد والتهيئة الآلية:** `http://localhost:8888/setup.php`
+
+---
+
+## 👨‍💻 معلومات المطور (Developer Information)
+
+- **المطور (Developer):** محمد أبو صالح | Mohamad Abu Saleh
+- **LinkedIn:** [https://www.linkedin.com/in/mohamad-abu-saleh-598255350](https://www.linkedin.com/in/mohamad-abu-saleh-598255350)
+- **WhatsApp / Phone:** [+970598600230](https://wa.me/970598600230)
+- **Email:** [mohamadabusaleh83@gmail.com](mailto:mohamadabusaleh83@gmail.com)
+

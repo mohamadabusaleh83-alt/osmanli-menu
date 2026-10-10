@@ -1,7 +1,12 @@
-/* ==========================================================================
-   OSMANLI - ABU SEIR 1854 (عصملي) - LUXURY SHOWCASE MENU STYLESHEET
-   Nablus - Rafidia - Opposite the Academy
-   ========================================================================== */
+/**
+ * ====================================================================
+ * Project: OSMANLI - ABU SEIR 1854 (عصملي) | Luxury Showcase Menu
+ * Developer: Mohamad Abu Saleh
+ * Phone / WhatsApp: +970598600230 (https://wa.me/970598600230)
+ * Email: mohamadabusaleh83@gmail.com
+ * LinkedIn: https://www.linkedin.com/in/mohamad-abu-saleh-598255350
+ * ====================================================================
+ */
 
 :root {
   --color-primary: #0e2a22;        /* Royal Ottoman Emerald / Dark Teal */
@@ -1814,3 +1819,78 @@ a {
   border-color: var(--color-gold);
   color: var(--color-gold);
 }
+
+/* ================= Developer Signature (توقيع المطور) ================= */
+.footer-bottom-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  text-align: center;
+}
+
+.developer-signature {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  padding: 0.45rem 1.2rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 30px;
+  font-size: 0.85rem;
+  color: #b3c2be;
+  margin-top: 0.35rem;
+  backdrop-filter: blur(4px);
+  transition: all 0.3s ease;
+}
+
+.developer-signature:hover {
+  background: rgba(212, 175, 55, 0.09);
+  border-color: rgba(212, 175, 55, 0.6);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.developer-signature .dev-link {
+  color: var(--color-gold-bright, #f7e7be);
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.developer-signature .dev-link:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.developer-signature .dev-sep {
+  color: rgba(212, 175, 55, 0.5);
+  margin: 0 0.35rem;
+}
+
+.developer-signature .dev-whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: #25d366;
+  color: #ffffff !important;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.8rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(37, 211, 102, 0.3);
+}
+
+.developer-signature .dev-whatsapp-btn:hover {
+  background: #1ebc59;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.5);
+}
+
