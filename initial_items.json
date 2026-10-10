@@ -1,0 +1,266 @@
+[
+  {
+    "name": "كنافة ناعمة على الفحم",
+    "description": "عجينة ناعمة مخبوزة على الفحم بالجبنة الساخنة والقطر الخفيف.",
+    "price": 7.0,
+    "category": "كنافة",
+    "image_url": "images/knafeh_charcoal.jpg",
+    "is_available": 1
+  },
+  {
+    "name": "كنافة محيرة على الفحم / إسطنبولية",
+    "description": "ميكس العجينة الناعمة والخشنة على الفحم بالجبنة الذائبة.",
+    "price": 8.0,
+    "category": "كنافة",
+    "image_url": "images/knafeh-mohayara-icecream.jpg",
+    "is_available": 1
+  },
+  {
+    "name": "كنافة مبرومة بالجبنة",
+    "description": "كنافة مبرومة محشوة بالجبنة الفاخرة بالسمن البلدي والقطر المعطر.",
+    "price": 42.0,
+    "category": "كنافة",
+    "image_url": "images/knafeh-barma-tray.jpg",
+    "is_available": 1
+  },
+  {
+    "name": "كنافة بالقشطة",
+    "description": "عجينة ناعمة / خشنة + قشطة فاخرة.",
+    "price": 8.0,
+    "category": "كنافة",
+    "image_url": "images/knafeh_charcoal.jpg",
+    "is_available": 1
+  },
+  {
+    "name": "كنافة دايت",
+    "description": "عجينة ناعمة / خشنة خفيفة السكر والدهون.",
+    "price": 10.0,
+    "category": "كنافة",
+    "image_url": "images/knafeh_charcoal.jpg",
+    "is_available": 1
+  },
+  {
+    "name": "كنافة البيستاشيو",
+    "description": "عجينة ناعمة / خشنة + زبدة الفستق الحلبي الفاخرة.",
+    "price": 10.0,
+    "category": "كنافة",
+    "image_url": "images/knafeh-mix-flavours.jpg",
+    "is_available": 1
+  },
+  {
+    "name": "كنافة النوتيلا",
+    "description": "عجينة ناعمة / خشنة + نوتيلا أصلية غنية.",
+    "price": 10.0,
+    "category": "كنافة",
+    "image_url": "images/knafeh-mix-flavours.jpg",
+    "is_available": 1
+  },
+  {
+    "name": "كنافة اللوتس",
+    "description": "عجينة ناعمة / خشنة + زبدة وبسكوت اللوتس.",
+    "price": 10.0,
+    "category": "كنافة",
+    "image_url": "images/knafeh-mix-flavours.jpg",
+    "is_available": 1
+  },
+  {
+    "name": "اليوزباشي",
+    "description": "عجينة ناعمة / خشنة + فستق حلبي مطحون + الجبنة / قشطة / بوظة.",
+    "price": 10.0,
+    "category": "كنافة",
+    "image_url": "images/knafeh_charcoal.jpg",
+    "is_available": 1
+  },
+  {
+    "name": "عصملية السلطان",
+    "description": "عجينة فستق حلبي + قشطة + عجينة ناعمة/خشنة.",
+    "price": 13.0,
+    "category": "كنافة",
+    "image_url": "images/osmaliyeh-sultan-green.jpg",
+    "is_available": 1
+  },
+  {
+    "name": "عصملية أبو سير",
+    "description": "فستق حلبي حب + عجينة ناعمة / خشنة + فستق حلبي مطحون + الجبنة / قشطة / بوظة.",
+    "price": 14.0,
+    "category": "كنافة",
+    "image_url": "images/osmaliyeh-abu-seir-stretch.jpg",
+    "is_available": 1
+  },
+  {
+    "name": "فطير بالقشطة (شفايف)",
+    "description": "رقائق مورقة ذهبية محشوة بالقشطة الطازجة والقطر المعطر.",
+    "price": 7.0,
+    "category": "حلويات شرقية وتركية",
+    "image_url": "images/fateer_shafayef.jpg",
+    "is_available": 1
+  },
+  {
+    "name": "فطير بالجبنة",
+    "description": "فطير مورق محشو بالجبنة الساخنة الذائبة.",
+    "price": 7.0,
+    "category": "حلويات شرقية وتركية",
+    "image_url": "images/fateer_shafayef.jpg",
+    "is_available": 1
+  },
+  {
+    "name": "كلاج بالجبنة",
+    "description": "رولات الكلاج المقرمشة الشهيرة بحشوة الجبنة الفاخرة.",
+    "price": 7.0,
+    "category": "حلويات شرقية وتركية",
+    "image_url": "images/kellaj_cheese.jpg",
+    "is_available": 1
+  },
+  {
+    "name": "بسكوت شهرزاد",
+    "description": "بسكوت مقرمش خفيف محشو بالقشطة ومغطى بالفستق الحلبي.",
+    "price": 7.0,
+    "category": "حلويات شرقية وتركية",
+    "image_url": "images/shahrazad_biscuit.jpg",
+    "is_available": 1
+  },
+  {
+    "name": "بين النارين",
+    "description": "طبقتان من شعيرية الكنافة المحمصة يتوسطهما قلب غني من القشطة الفاخرة.",
+    "price": 7.0,
+    "category": "حلويات شرقية وتركية",
+    "image_url": "images/knafeh_bain_narin.jpg",
+    "is_available": 1
+  },
+  {
+    "name": "خدود الست بالقشطة الطبيعية",
+    "description": "حبات دائرية مورقة بالسمن البلدي محشوة بقشطة طبيعية وفستق.",
+    "price": 7.0,
+    "category": "حلويات شرقية وتركية",
+    "image_url": "images/khodoud_elsett.jpg",
+    "is_available": 1
+  },
+  {
+    "name": "حلاوة الجبن",
+    "description": "لفائف رقائق الجبن والسميد الطرية المحشوة بقشطة فاخرة وزهر الليمون.",
+    "price": 8.0,
+    "category": "حلويات شرقية وتركية",
+    "image_url": "images/halawet_jibn.jpg",
+    "is_available": 1
+  },
+  {
+    "name": "مدلوقة بالقشطة",
+    "description": "عجينة كنافة ناعمة مطبوخة تعلوها قشطة كثيفة ومكسرات محمصة.",
+    "price": 8.0,
+    "category": "حلويات شرقية وتركية",
+    "image_url": "images/madlouqa-plate.jpg",
+    "is_available": 1
+  },
+  {
+    "name": "أصابع الفستق الحلبي",
+    "description": "مبرومة فاخرة محشوة بالفستق الحلبي الأخضر المحمص بدون أي إضافات.",
+    "price": 7.0,
+    "category": "حلويات شرقية وتركية",
+    "image_url": "images/asabea-fustuq-plate.jpg",
+    "is_available": 1
+  },
+  {
+    "name": "أصابع الجوز",
+    "description": "أصابع بقلاوة مقرمشة محشوة بالجوز البلدي المجروش والمتبل بالقرفة.",
+    "price": 7.0,
+    "category": "حلويات شرقية وتركية",
+    "image_url": "images/asabea-jawz-plate.jpg",
+    "is_available": 1
+  },
+  {
+    "name": "أصابع قشطة",
+    "description": "أصابع جلاش ذهبية مقرمشة محشوة بقشطة فاخرة.",
+    "price": 7.0,
+    "category": "حلويات شرقية وتركية",
+    "image_url": "images/asabea-ashta-plate.jpg",
+    "is_available": 1
+  },
+  {
+    "name": "بقلاوة تركية (مثلثات)",
+    "description": "مثلثات بقلاوة تركية مورقة غنية بالفستق الحلبي والقشطة.",
+    "price": 12.0,
+    "category": "حلويات شرقية وتركية",
+    "image_url": "images/baklava_turkish.jpg",
+    "is_available": 1
+  },
+  {
+    "name": "عش البلبل",
+    "description": "أعشاش كنافة مقرمشة محشوة بالنوتيلا أو الفستق الحلبي.",
+    "price": 1.0,
+    "category": "حلويات شرقية وتركية",
+    "image_url": "images/osh-el-bolbol-chocolate.jpg",
+    "is_available": 1
+  },
+  {
+    "name": "تريليتشيا (كيكة الكراميل التركية)",
+    "description": "كيكة الحليب والكراميل التركية الإسفنجية المنعشة المشربة بثلاثة أنواع حليب.",
+    "price": 10.0,
+    "category": "حلويات شرقية وتركية",
+    "image_url": "images/trilece-cake.jpg",
+    "is_available": 1
+  },
+  {
+    "name": "مشكل حلويات فاخرة",
+    "description": "صواني وبوكسات ضيافة مشكلة مختارة من أرقى أصناف الحلويات الشرقية والتركية.",
+    "price": 85.0,
+    "category": "حلويات شرقية وتركية",
+    "image_url": "images/baklava_turkish.jpg",
+    "is_available": 1
+  },
+  {
+    "name": "هريسة بالسمن البلدي",
+    "description": "ضيافة شامية فاخرة بالسمن البلدي (/ 1 كيلو)",
+    "price": 25.0,
+    "category": "نثريات ومعمول",
+    "image_url": "images/shahrazad_biscuit.jpg",
+    "is_available": 1
+  },
+  {
+    "name": "برازق شامية بالسمسم والفستق",
+    "description": "ضيافة شامية فاخرة بالسمن البلدي (/ 1 كيلو)",
+    "price": 30.0,
+    "category": "نثريات ومعمول",
+    "image_url": "images/shahrazad_biscuit.jpg",
+    "is_available": 1
+  },
+  {
+    "name": "غريبة ناعمة بالسمن البلدي",
+    "description": "ضيافة شامية فاخرة بالسمن البلدي (/ 1 كيلو)",
+    "price": 30.0,
+    "category": "نثريات ومعمول",
+    "image_url": "images/shahrazad_biscuit.jpg",
+    "is_available": 1
+  },
+  {
+    "name": "غريبة محشية فستق حلبي",
+    "description": "ضيافة شامية فاخرة بالسمن البلدي (/ للقطعة)",
+    "price": 5.0,
+    "category": "نثريات ومعمول",
+    "image_url": "images/shahrazad_biscuit.jpg",
+    "is_available": 1
+  },
+  {
+    "name": "معمول عجوة المدينة الفاخرة",
+    "description": "ضيافة شامية فاخرة بالسمن البلدي (/ 1 كيلو)",
+    "price": 40.0,
+    "category": "نثريات ومعمول",
+    "image_url": "images/shahrazad_biscuit.jpg",
+    "is_available": 1
+  },
+  {
+    "name": "معمول جوز بلدي معطر بماء الزهر",
+    "description": "ضيافة شامية فاخرة بالسمن البلدي (/ 1 كيلو)",
+    "price": 55.0,
+    "category": "نثريات ومعمول",
+    "image_url": "images/shahrazad_biscuit.jpg",
+    "is_available": 1
+  },
+  {
+    "name": "معمول فستق حلبي أخضر ملكي",
+    "description": "ضيافة شامية فاخرة بالسمن البلدي (/ 1 كيلو)",
+    "price": 80.0,
+    "category": "نثريات ومعمول",
+    "image_url": "images/shahrazad_biscuit.jpg",
+    "is_available": 1
+  }
+]
