@@ -8,11 +8,15 @@
  * ====================================================================
  */
 
+// رابط تقييم خرائط Google لفرع عصملي - نابلس (ثابت لسهولة التحديث)
+const GOOGLE_MAPS_REVIEW_URL = "https://maps.google.com"; // رابط مؤقت سهل الاستبدال
+
 document.addEventListener("DOMContentLoaded", () => {
   setupCategoryNav();
   setupDynamicSizeChips();
   setupShareMenu();
   setupFeedbackSystem();
+  setupPhoneLinks();
 });
 
 // ========================================================
@@ -127,14 +131,14 @@ function setupShareMenu() {
         await navigator.share(shareData);
         return;
       } catch (err) {
-        // إذا قام المستخدم بالإلغاء لا نفعل شيئاً، وإذا حدث خطأ نعتمد النسخ للحافظة
+        // إذا قام المستخدم بالإلغاء لا نفعل شيئاً
         if (err.name === "AbortError") {
           return;
         }
       }
     }
 
-    // البديل: النسخ إلى الحافظة تلقائياً (Clipboard Copy Fallback)
+    // البديل الاحتياطي: النسخ إلى الحافظة تلقائياً (Clipboard Copy Fallback)
     copyShareLinkToClipboard(shareUrl);
   });
 }
@@ -156,11 +160,14 @@ function copyShareLinkToClipboard(url) {
 function fallbackCopyExec(url) {
   const dummy = document.createElement("input");
   dummy.value = url;
+  dummy.style.position = "fixed";
+  dummy.style.left = "-9999px";
+  dummy.style.opacity = "0";
   document.body.appendChild(dummy);
   dummy.select();
   try {
     document.execCommand("copy");
-    showToast("تم نسخ رابط المنيو بنجاح! 🔗", "success");
+    showToast("تم نسخ رابط المنيو بنجاح! 🔗 شاركه الآن مع أحبابك", "success");
   } catch (e) {
     showToast("رابط المنيو: " + url, "info");
   }
@@ -168,36 +175,77 @@ function fallbackCopyExec(url) {
 }
 
 // ========================================================
-// 4. نظام تقييم وملاحظات الزبائن (Private Feedback System)
+// 3.5 فحص وإصلاح روابط الاتصال المباشر (Phone Call Links)
+// ========================================================
+function setupPhoneLinks() {
+  const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
+  phoneLinks.forEach(link => {
+    // التأكد من ضبط الرابط بصيغة tel:0598001608 مباشرة
+    const href = link.getAttribute("href");
+    if (!href || href === "tel:" || href.includes("invalid")) {
+      link.setAttribute("href", "tel:0598001608");
+    }
+  });
+}
+
+// ========================================================
+// 4. نظام توجيه التقييمات الذكي (Review Funneling System)
 // ========================================================
 function setupFeedbackSystem() {
   const starBtns = document.querySelectorAll("#starRatingSelector .star-btn");
   const ratingInput = document.getElementById("selectedRating");
   const ratingHint = document.getElementById("ratingTextHint");
+  const positiveFunnel = document.getElementById("positiveFeedbackFunnel");
+  const negativeFunnel = document.getElementById("negativeFeedbackFunnel");
+  const googleReviewLink = document.getElementById("btnGoogleReviewLink");
+
+  // تعيين رابط خرائط جوجل من المتغير الثابت
+  if (googleReviewLink) {
+    googleReviewLink.href = GOOGLE_MAPS_REVIEW_URL;
+  }
+
   const hintMap = {
     1: "بحاجة لتحسين (1 من 5)",
     2: "مقبول (2 من 5)",
     3: "جيد (3 من 5)",
-    4: "جيد جداً (4 من 5)",
+    4: "جيد جداً (4 من 5) ⭐",
     5: "ممتاز (5 من 5) ⭐"
   };
+
+  function updateFunnelState(val) {
+    if (ratingInput) ratingInput.value = val;
+    if (ratingHint) ratingHint.textContent = hintMap[val] || `${val} من 5`;
+
+    starBtns.forEach(b => {
+      const bVal = parseInt(b.getAttribute("data-rating"), 10);
+      if (bVal <= val) {
+        b.classList.add("active");
+      } else {
+        b.classList.remove("active");
+      }
+    });
+
+    // الشرط المنطقي للتوجيه الذكي:
+    // 4 أو 5 نجوم (تقييم إيجابي) -> إظهار مسار خرائط جوجل وزر التقييم المباشر
+    // 1 أو 2 أو 3 نجوم (تقييم منخفض) -> إظهار صندوق الملاحظات الخاص بالإدارة
+    if (val >= 4) {
+      if (positiveFunnel) positiveFunnel.style.display = "block";
+      if (negativeFunnel) negativeFunnel.style.display = "none";
+    } else {
+      if (positiveFunnel) positiveFunnel.style.display = "none";
+      if (negativeFunnel) negativeFunnel.style.display = "block";
+    }
+  }
 
   starBtns.forEach(btn => {
     btn.addEventListener("click", () => {
       const val = parseInt(btn.getAttribute("data-rating"), 10);
-      if (ratingInput) ratingInput.value = val;
-      if (ratingHint) ratingHint.textContent = hintMap[val] || `${val} من 5`;
-
-      starBtns.forEach(b => {
-        const bVal = parseInt(b.getAttribute("data-rating"), 10);
-        if (bVal <= val) {
-          b.classList.add("active");
-        } else {
-          b.classList.remove("active");
-        }
-      });
+      updateFunnelState(val);
     });
   });
+
+  // تعيين الحالة المبدئية 5 نجوم
+  updateFunnelState(5);
 }
 
 function openFeedbackModal() {
@@ -205,6 +253,25 @@ function openFeedbackModal() {
   if (modal) {
     modal.style.display = "flex";
     document.body.style.overflow = "hidden";
+
+    // إعادة التهيئة للحالة الافتراضية: 5 نجوم مع المسار الإيجابي
+    const starBtns = document.querySelectorAll("#starRatingSelector .star-btn");
+    const ratingInput = document.getElementById("selectedRating");
+    const ratingHint = document.getElementById("ratingTextHint");
+    const positiveFunnel = document.getElementById("positiveFeedbackFunnel");
+    const negativeFunnel = document.getElementById("negativeFeedbackFunnel");
+    const commentField = document.getElementById("negativeCustComment");
+    const nameField = document.getElementById("negativeCustName");
+    const statusMsg = document.getElementById("negativeFeedbackStatusMsg");
+
+    if (ratingInput) ratingInput.value = 5;
+    if (ratingHint) ratingHint.textContent = "ممتاز (5 من 5) ⭐";
+    starBtns.forEach(b => b.classList.add("active"));
+    if (positiveFunnel) positiveFunnel.style.display = "block";
+    if (negativeFunnel) negativeFunnel.style.display = "none";
+    if (commentField) commentField.value = "";
+    if (nameField) nameField.value = "";
+    if (statusMsg) statusMsg.style.display = "none";
   }
 }
 
@@ -216,23 +283,55 @@ function closeFeedbackModal() {
   }
 }
 
-async function submitFeedbackForm(event) {
+function handleGoogleReviewClick() {
+  const ratingInput = document.getElementById("selectedRating");
+  const rating = ratingInput ? parseInt(ratingInput.value, 10) : 5;
+
+  // تسجيل التقييم الإيجابي في الخلفية للإدارة
+  try {
+    fetch("feedback.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        rating: rating,
+        comment: "تقييم إيجابي ممتاز (تم التوجيه لخرائط جوجل)",
+        customer_name: "زبون عصملي"
+      })
+    }).catch(() => {});
+  } catch (e) {}
+
+  showToast("سعداء جداً بتجربتك! شكراً لدعمك عصملي على Google ⭐", "success");
+  setTimeout(() => {
+    closeFeedbackModal();
+  }, 1000);
+}
+
+async function submitNegativeFeedbackForm(event) {
   event.preventDefault();
-  const form = document.getElementById("feedbackForm");
-  const rating = document.getElementById("selectedRating") ? document.getElementById("selectedRating").value : 5;
-  const comment = document.getElementById("feedbackComment") ? document.getElementById("feedbackComment").value.trim() : "";
-  const customerName = document.getElementById("feedbackCustomerName") ? document.getElementById("feedbackCustomerName").value.trim() : "";
-  const submitBtn = document.getElementById("btnSubmitFeedback");
-  const statusMsg = document.getElementById("feedbackStatusMsg");
+  const ratingInput = document.getElementById("selectedRating");
+  const rating = ratingInput ? parseInt(ratingInput.value, 10) : 3;
+  const commentEl = document.getElementById("negativeCustComment");
+  const nameEl = document.getElementById("negativeCustName");
+  const submitBtn = document.getElementById("btnSubmitNegativeFeedback");
+  const statusMsg = document.getElementById("negativeFeedbackStatusMsg");
+
+  const comment = commentEl ? commentEl.value.trim() : "";
+  const customerName = nameEl ? nameEl.value.trim() : "";
 
   if (!comment) {
-    alert("يرجى كتابة رأيك أو ملاحظتك.");
+    if (statusMsg) {
+      statusMsg.style.display = "block";
+      statusMsg.className = "feedback-status-msg error";
+      statusMsg.textContent = "يرجى كتابة ملاحظتك لمساعدتنا على تحسين الخدمة فوراً.";
+    } else {
+      alert("يرجى كتابة ملاحظتك لمساعدتنا على تحسين الخدمة.");
+    }
     return;
   }
 
   if (submitBtn) {
     submitBtn.disabled = true;
-    submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>جارٍ الإرسال...</span>';
+    submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>جارٍ إرسال الملاحظة للإدارة...</span>';
   }
 
   try {
@@ -240,35 +339,44 @@ async function submitFeedbackForm(event) {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        rating: parseInt(rating, 10),
+        rating: rating,
         comment: comment,
-        customer_name: customerName
+        customer_name: customerName || "زبون عصملي"
       })
     });
     const data = await res.json();
     if (data.success) {
-      form.reset();
       closeFeedbackModal();
-      showToast(data.message || "شكراً لك! رأيك يهمنا ويسعدنا دائماً في عصملي ❤️", "success");
+      showToast("شكراً لملاحظتك، تم إرسالها مباشرة للإدارة لمتابعتها 🤝", "success");
+      if (commentEl) commentEl.value = "";
+      if (nameEl) nameEl.value = "";
     } else {
       if (statusMsg) {
         statusMsg.style.display = "block";
         statusMsg.className = "feedback-status-msg error";
-        statusMsg.textContent = data.error || "حدث خطأ أثناء حفظ التقييم.";
+        statusMsg.textContent = data.error || "حدث خطأ أثناء حفظ الملاحظة.";
       }
     }
   } catch (err) {
-    // في حال عدم توفر اتصال بالخادم المباشر أو الاستضافة الثابتة
-    form.reset();
+    // في حال الاستضافة الساكنة أو انقطاع الاتصال المؤقت
     closeFeedbackModal();
-    showToast("شكراً جزيلاً لك! تم استلام تقييمك ورأيك يهمنا ويسعدنا دائماً في عصملي ❤️", "success");
+    showToast("شكراً لملاحظتك، تم إرسالها مباشرة للإدارة لمتابعتها 🤝", "success");
+    if (commentEl) commentEl.value = "";
+    if (nameEl) nameEl.value = "";
   } finally {
     if (submitBtn) {
       submitBtn.disabled = false;
-      submitBtn.innerHTML = '<span>إرسال الرأي</span> <i class="fa-solid fa-paper-plane"></i>';
+      submitBtn.innerHTML = '<span>إرسال الملاحظة سراً للإدارة</span> <i class="fa-solid fa-paper-plane"></i>';
     }
   }
 }
+
+// توافق رجعي لأي استدعاءات خارجية
+window.submitFeedbackForm = submitNegativeFeedbackForm;
+window.submitNegativeFeedbackForm = submitNegativeFeedbackForm;
+window.handleGoogleReviewClick = handleGoogleReviewClick;
+window.openFeedbackModal = openFeedbackModal;
+window.closeFeedbackModal = closeFeedbackModal;
 
 // ========================================================
 // 5. التنبيه العائم السريع (Toast Notification Utility)

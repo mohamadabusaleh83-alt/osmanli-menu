@@ -46,10 +46,14 @@ if ($rating < 1 || $rating > 5) {
     exit;
 }
 
-if (empty($comment)) {
+if ($rating <= 3 && empty($comment)) {
     http_response_code(400);
-    echo json_encode(['success' => false, 'error' => 'يرجى كتابة رأيك أو ملاحظتك.']);
+    echo json_encode(['success' => false, 'error' => 'يرجى كتابة ملاحظتك لمساعدتنا على تحسين الخدمة.']);
     exit;
+}
+
+if ($rating >= 4 && empty($comment)) {
+    $comment = 'تقييم إيجابي ممتاز (تم التوجيه لخرائط جوجل)';
 }
 
 if (empty($customer_name)) {

@@ -2223,6 +2223,139 @@ a {
 }
 
 /* ========================================================
+   نظام توجيه التقييمات الذكي (Review Funneling Styles)
+   ======================================================== */
+.feedback-rating-step {
+  text-align: center;
+  padding-bottom: 1.15rem;
+  margin-bottom: 1.15rem;
+  border-bottom: 1px dashed rgba(212, 175, 55, 0.25);
+}
+.feedback-rating-step .feedback-form-label {
+  font-size: 0.95rem;
+  margin-bottom: 0.65rem;
+}
+.funnel-container {
+  animation: fadeInModal 0.25s ease-out;
+}
+.funnel-positive-card {
+  text-align: center;
+  padding: 0.4rem 0.2rem;
+}
+.funnel-badge-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.75rem;
+}
+.funnel-positive-badge {
+  background: rgba(46, 213, 115, 0.15);
+  border: 1px solid rgba(46, 213, 115, 0.35);
+  color: #2ed573;
+  padding: 5px 16px;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.funnel-card-title {
+  color: #f7e7be;
+  font-size: 1.15rem;
+  font-weight: 800;
+  margin: 0 0 0.6rem 0;
+  line-height: 1.45;
+}
+.funnel-card-desc {
+  color: #c4d3ce;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0 0 1.35rem 0;
+}
+.btn-google-maps-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  padding: 14px 20px;
+  background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
+  color: #071712 !important;
+  font-size: 1.05rem;
+  font-weight: 800;
+  border-radius: 12px;
+  text-decoration: none !important;
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35);
+  transition: all 0.25s ease;
+  box-sizing: border-box;
+}
+.btn-google-maps-cta:hover {
+  background: linear-gradient(135deg, #f7e7be 0%, #d4af37 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(212, 175, 55, 0.55);
+}
+.btn-google-maps-cta i.fa-google {
+  font-size: 1.3rem;
+  color: #071712;
+}
+.btn-google-maps-cta i.fa-arrow-up-right-from-square {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+.funnel-thanks-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+.funnel-negative-card {
+  padding: 0.2rem 0;
+}
+.funnel-negative-badge {
+  background: rgba(255, 170, 0, 0.15);
+  border: 1px solid rgba(255, 170, 0, 0.35);
+  color: #ffa502;
+  padding: 5px 16px;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.funnel-negative-intro {
+  color: #f7e7be;
+  font-size: 0.92rem;
+  margin: 0.4rem 0 0.9rem;
+  line-height: 1.5;
+  text-align: center;
+}
+.feedback-confidential-banner {
+  background: rgba(4, 13, 10, 0.65);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 0.84rem;
+  color: #c4d3ce;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1.15rem;
+}
+.feedback-confidential-banner i {
+  color: var(--color-gold);
+  font-size: 1.15rem;
+  flex-shrink: 0;
+}
+.feedback-modal-footer-inside {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+/* ========================================================
    صندوق التنبيه العائم السريع (Toast Notification)
    ======================================================== */
 .toast-notification {
@@ -2281,6 +2414,7 @@ a {
   }
   .feedback-modal-dialog {
     border-radius: 16px;
+    margin: 1rem;
   }
   .feedback-modal-header {
     padding: 1rem 1.2rem;
@@ -2288,14 +2422,20 @@ a {
   .feedback-modal-body {
     padding: 1.2rem;
   }
-  .feedback-modal-footer {
-    padding: 1rem 1.2rem;
+  .feedback-modal-footer,
+  .feedback-modal-footer-inside {
+    padding: 1rem 0;
     flex-direction: column-reverse;
   }
-  .feedback-modal-footer button {
+  .feedback-modal-footer button,
+  .feedback-modal-footer-inside button {
     width: 100%;
     min-height: 48px;
     justify-content: center;
+  }
+  .btn-google-maps-cta {
+    font-size: 0.92rem;
+    padding: 12px 14px;
   }
 }
 

@@ -1966,58 +1966,100 @@
   </footer>
 
   <!-- ========================================================
-       نافذة تقييم وملاحظات الزبائن (Private Customer Feedback Modal)
+       نافذة نظام توجيه التقييمات الذكي (Smart Review Funneling Modal)
        ======================================================== -->
   <div class="feedback-modal-overlay" id="feedbackModalOverlay" style="display: none;" onclick="if(event.target === this) closeFeedbackModal();">
     <div class="feedback-modal-dialog">
       <div class="feedback-modal-header">
         <div class="feedback-modal-title-wrap">
           <i class="fa-solid fa-crown gold-icon"></i>
-          <h3>شاركنا رأيك في عصملي ⭐</h3>
+          <h3 id="feedbackModalMainTitle">شاركنا رأيك في عصملي ⭐</h3>
         </div>
         <button type="button" class="feedback-close-btn" onclick="closeFeedbackModal()">&times;</button>
       </div>
-      <form id="feedbackForm" onsubmit="submitFeedbackForm(event)">
-        <div class="feedback-modal-body">
-          <div class="feedback-privacy-note">
-            <i class="fa-solid fa-shield-halved"></i>
-            <span>ملاحظاتك سرية وخاصة تماماً وتصل مباشرة إلى إدارة المطعم.</span>
+
+      <div class="feedback-modal-body">
+        <!-- 1. شريط اختيار عدد النجوم (1 إلى 5) -->
+        <div class="feedback-rating-step">
+          <label class="feedback-form-label">كيف تقيّم تجربتك ومذاق الحلويات في عصملي؟ <span style="color:#ff6b6b;">*</span></label>
+          <div class="star-rating-selector" id="starRatingSelector">
+            <button type="button" class="star-btn active" data-rating="1" title="نجمة واحدة"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn active" data-rating="2" title="نجمتان"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn active" data-rating="3" title="3 نجوم"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn active" data-rating="4" title="4 نجوم"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn active" data-rating="5" title="5 نجوم (ممتاز)"><i class="fa-solid fa-star"></i></button>
           </div>
-          
-          <div class="feedback-form-group">
-            <label class="feedback-form-label">تقييمك لتجربتك في عصملي: <span style="color:#ff6b6b;">*</span></label>
-            <div class="star-rating-selector" id="starRatingSelector">
-              <button type="button" class="star-btn active" data-rating="1" title="نجمة واحدة"><i class="fa-solid fa-star"></i></button>
-              <button type="button" class="star-btn active" data-rating="2" title="نجمتان"><i class="fa-solid fa-star"></i></button>
-              <button type="button" class="star-btn active" data-rating="3" title="3 نجوم"><i class="fa-solid fa-star"></i></button>
-              <button type="button" class="star-btn active" data-rating="4" title="4 نجوم"><i class="fa-solid fa-star"></i></button>
-              <button type="button" class="star-btn active" data-rating="5" title="5 نجوم (ممتاز)"><i class="fa-solid fa-star"></i></button>
+          <input type="hidden" id="selectedRating" name="rating" value="5">
+          <span class="rating-text-hint" id="ratingTextHint">ممتاز (5 من 5) ⭐</span>
+        </div>
+
+        <!-- 2. المسار الإيجابي (4 أو 5 نجوم): التوجيه لخرائط جوجل -->
+        <div class="funnel-container funnel-positive" id="positiveFeedbackFunnel">
+          <div class="funnel-positive-card">
+            <div class="funnel-badge-wrap">
+              <span class="funnel-positive-badge"><i class="fa-solid fa-heart gold-icon"></i> سعداء جداً بتجربتك!</span>
             </div>
-            <input type="hidden" id="selectedRating" name="rating" value="5">
-            <span class="rating-text-hint" id="ratingTextHint">ممتاز (5 من 5) ⭐</span>
-          </div>
+            <h4 class="funnel-card-title">يسعدنا مشاركة تقييمك الرائع على خرائط جوجل لدعمنا ⭐</h4>
+            <p class="funnel-card-desc">
+              رأيك الجميل يمنحنا طاقة للاستمرار، ويساعد زوار نابلس وعشاق الكنافة والحلويات على اكتشاف نكهتنا التراثية الأصلية.
+            </p>
+            
+            <a href="https://maps.google.com" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               class="btn-google-maps-cta" 
+               id="btnGoogleReviewLink"
+               onclick="handleGoogleReviewClick()">
+              <i class="fa-brands fa-google"></i>
+              <span>تقييم عصملي على خرائط Google ⭐⭐⭐⭐⭐</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
 
-          <div class="feedback-form-group">
-            <label for="feedbackCustomerName" class="feedback-form-label">اسمك الكريم (اختياري):</label>
-            <input type="text" id="feedbackCustomerName" name="customer_name" class="feedback-input" placeholder="اسمك الكريم (اختياري)">
+            <div class="funnel-thanks-row">
+              <button type="button" class="btn-cancel-feedback" onclick="closeFeedbackModal()">تم، شكراً لكم ❤️</button>
+            </div>
           </div>
-
-          <div class="feedback-form-group">
-            <label for="feedbackComment" class="feedback-form-label">ملاحظتك أو رأيك: <span style="color:#ff6b6b;">*</span></label>
-            <textarea id="feedbackComment" name="comment" class="feedback-textarea" rows="4" placeholder="شاركنا رأيك في جودة الكنافة، الخدمة، أو أي مقترح تطوير..." required></textarea>
-          </div>
-
-          <div class="feedback-status-msg" id="feedbackStatusMsg" style="display: none;"></div>
         </div>
 
-        <div class="feedback-modal-footer">
-          <button type="button" class="btn-cancel-feedback" onclick="closeFeedbackModal()">إلغاء</button>
-          <button type="submit" class="btn-submit-feedback" id="btnSubmitFeedback">
-            <span>إرسال الرأي</span>
-            <i class="fa-solid fa-paper-plane"></i>
-          </button>
+        <!-- 3. المسار المنخفض (1 أو 2 أو 3 نجوم): ملاحظات سرية داخلية للإدارة -->
+        <div class="funnel-container funnel-negative" id="negativeFeedbackFunnel" style="display: none;">
+          <form id="negativeFeedbackForm" onsubmit="submitNegativeFeedbackForm(event)">
+            <div class="funnel-negative-card">
+              <div class="funnel-badge-wrap">
+                <span class="funnel-negative-badge"><i class="fa-solid fa-hand-holding-heart"></i> نعتذر لعدم رضاك التام</span>
+              </div>
+              <p class="funnel-negative-intro">
+                <strong>نأسف لعدم رضاك التام</strong>، يهمنا جداً سماع ملاحظتك لتحسين الخدمة فوراً.
+              </p>
+              <div class="feedback-confidential-banner">
+                <i class="fa-solid fa-user-shield"></i>
+                <span>ملاحظتك سرية وخاصة 100%، وتصل مباشرة إلى الإدارة العليا لمعالجتها دون أي نشر للعامة.</span>
+              </div>
+
+              <div class="feedback-form-group">
+                <label for="negativeCustName" class="feedback-form-label">اسمك الكريم (اختياري):</label>
+                <input type="text" id="negativeCustName" class="feedback-input" placeholder="اسمك الكريم (اختياري)">
+              </div>
+
+              <div class="feedback-form-group">
+                <label for="negativeCustComment" class="feedback-form-label">ملاحظتك أو سبب عدم الرضا: <span style="color:#ff6b6b;">*</span></label>
+                <textarea id="negativeCustComment" class="feedback-textarea" rows="4" placeholder="نأسف لعدم رضاك التام، يهمنا جداً سماع ملاحظتك لتحسين الخدمة فوراً..." required></textarea>
+              </div>
+
+              <div class="feedback-status-msg" id="negativeFeedbackStatusMsg" style="display: none;"></div>
+
+              <div class="feedback-modal-footer-inside">
+                <button type="button" class="btn-cancel-feedback" onclick="closeFeedbackModal()">إلغاء</button>
+                <button type="submit" class="btn-submit-feedback" id="btnSubmitNegativeFeedback">
+                  <span>إرسال الملاحظة سراً للإدارة</span>
+                  <i class="fa-solid fa-paper-plane"></i>
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
-      </form>
+
+      </div>
     </div>
   </div>
 
