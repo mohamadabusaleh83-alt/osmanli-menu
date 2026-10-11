@@ -7,13 +7,13 @@
 CREATE DATABASE IF NOT EXISTS `osmanli_db` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE `osmanli_db`;
 
--- 1. جدول المستخدمين والمشرفين (Users / Admins Table)
 DROP TABLE IF EXISTS `customer_feedback`;
 DROP TABLE IF EXISTS `item_variants`;
 DROP TABLE IF EXISTS `item_addons`;
 DROP TABLE IF EXISTS `menu_items`;
 DROP TABLE IF EXISTS `users`;
 
+-- 1. جدول المستخدمين والمشرفين (Users / Admins Table)
 CREATE TABLE `users` (
   `id` INT AUTO_INCREMENT PRIMARY KEY,
   `username` VARCHAR(50) NOT NULL UNIQUE,
@@ -24,7 +24,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `users` (`username`, `email`, `password_hash`, `role`) VALUES
-('admin', 'admin@osmanli.ps', '$2y$10$/hz6GW7tuQ7S88IvgKSEde5l4TgkbIldRG.2T/A2jHHiAmjw8gvm6', 'admin');
+('admin', 'admin@osmanli.ps', '$2y$10$xaHaRMX7qaCldTPjcJf2ee2PYGN.NI.1FeeDCNykre.k8HQ.28Ta.', 'admin');
 
 -- 2. جدول أصناف المنيو (Menu Items Table)
 CREATE TABLE `menu_items` (
@@ -43,7 +43,7 @@ CREATE TABLE `menu_items` (
 INSERT INTO `menu_items` (`id`, `name`, `description`, `price`, `category`, `sort_order`, `image_url`, `is_available`) VALUES
 (1, 'كنافة ناعمة على الفحم', 'عجينة ناعمة مخبوزة على الفحم', 7.00, 'الكنافة', 1, 'images/knafeh_charcoal.jpg', 1),
 (2, 'كنافة محيرة على الفحم / إسطنبولية', '', 8.00, 'الكنافة', 1, 'uploads/dish_6aca17cc5ae6b_1791629260.jpg', 1),
-(3, 'كنافة مبرومة بالجبنة', 'كنافة مبرومة محشوة بالجبنة', 40.00, 'الكنافة', 1, 'uploads/dish_6aca1552c6b47_1791628626.jpg', 1),
+(3, 'كنافة مبرومة بالجبنة', 'كنافة مبرومة محشوة بالجبنة', 42.00, 'الكنافة', 1, 'uploads/dish_6aca1552c6b47_1791628626.jpg', 1),
 (4, 'كنافة بالقشطة', 'عجينة ناعمة / خشنة + قشطة فاخرة.', 8.00, 'الكنافة', 1, 'images/knafeh_charcoal.jpg', 1),
 (5, 'كنافة دايت', 'عجينة ناعمة / خشنة خفيفة السكر والدهون.', 10.00, 'الكنافة', 1, 'images/knafeh_charcoal.jpg', 1),
 (6, 'كنافة البيستاشيو', 'عجينة ناعمة / خشنة + زبدة الفستق الحلبي الفاخرة.', 10.00, 'الكنافة', 1, 'uploads/dish_6acac8f74b8c8_1791674615.jpg', 1),
@@ -75,7 +75,7 @@ INSERT INTO `menu_items` (`id`, `name`, `description`, `price`, `category`, `sor
 (29, 'غريبة بالسمن البلدي', 'ضيافة شامية فاخرة بالسمن البلدي (/ 1 كيلو)', 36.00, 'النثريات والإضافات (البوظة، القشطة، النواشف)', 4, 'uploads/dish_6acac90ad8df5_1791674634.jpg', 1),
 (30, 'غريبة محشية فستق حلبي', 'ضيافة شامية فاخرة بالسمن البلدي (/ للقطعة)', 5.00, 'النثريات والإضافات (البوظة، القشطة، النواشف)', 4, 'uploads/dish_6aca286f82545_1791633519.jpg', 1),
 (31, 'معمول عجوة المدينة الفاخرة', 'ضيافة شامية فاخرة بالسمن البلدي (/ 1 كيلو)', 40.00, 'النثريات والإضافات (البوظة، القشطة، النواشف)', 4, 'uploads/dish_6aca186bec8c8_1791629419.jpg', 1),
-(32, 'معمول جوز', 'ضيافة شامية فاخرة بالسمن البلدي (/ 1 كيلو)', 55.00, 'النثريات والإضافات (البوظة، القشطة، النواشف)', 4, 'images/shahrazad_biscuit.jpg', 1),
+(32, 'معمول جوز', 'ضيافة شامية فاخرة بالسمن البلدي (/ 1 كيلو)', 55.00, 'النثريات والإضافات (البوظة، القشطة، النواشف)', 4, 'uploads/dish_6acbb2c4f04d1_1791734468.jpg', 1),
 (33, 'معمول فستق حلبي', 'ضيافة شامية فاخرة بالسمن البلدي (/ 1 كيلو)', 80.00, 'النثريات والإضافات (البوظة، القشطة، النواشف)', 4, 'uploads/dish_6aca182e271df_1791629358.jpg', 1);
 
 -- 3. جدول الأحجام والأسعار لكل صنف (Item Variants / Prices Table)
@@ -94,7 +94,6 @@ INSERT INTO `item_variants` (`item_id`, `size_name`, `price`) VALUES
 (1, 'M', 20.00),
 (1, 'L', 40.00),
 (1, 'XL', 60.00),
-(1, '2 كغ', 40.00),
 (4, 'XS', 8.00),
 (4, 'S', 12.00),
 (4, 'M', 20.00),
@@ -107,13 +106,11 @@ INSERT INTO `item_variants` (`item_id`, `size_name`, `price`) VALUES
 (9, 'M', 27.00),
 (9, 'L', 50.00),
 (9, 'XL', 75.00),
-(9, '2 كغ', 45.00),
 (14, 'شخصي (قطعة)', 7.00),
 (14, '1 كيلو', 40.00),
 (23, 'شخصي (قطعة)', 12.00),
 (25, 'شخصي (قطعة)', 10.00),
 (27, 'سعر موحد', 25.00),
-(32, 'سعر موحد', 55.00),
 (26, '1 كغ مشكل نواشف', 85.00),
 (26, '1 كغ مشكل فستق حلبي', 95.00),
 (26, '1 كغ مشكل تركي', 120.00),
@@ -121,7 +118,6 @@ INSERT INTO `item_variants` (`item_id`, `size_name`, `price`) VALUES
 (10, 'S', 18.00),
 (10, 'M', 32.00),
 (10, 'L', 65.00),
-(3, '2 كغ', 40.00),
 (3, 'L', 42.00),
 (3, 'XL', 60.00),
 (21, 'شخصي (4 قطع)', 7.00),
@@ -161,7 +157,6 @@ INSERT INTO `item_variants` (`item_id`, `size_name`, `price`) VALUES
 (11, 'XS', 14.00),
 (11, 'S', 20.00),
 (11, 'M', 35.00),
-(11, '2 كغ', 65.00),
 (11, 'L', 70.00),
 (11, 'XL', 100.00),
 (30, 'سعر موحد', 5.00),
@@ -183,7 +178,8 @@ INSERT INTO `item_variants` (`item_id`, `size_name`, `price`) VALUES
 (6, 'L', 55.00),
 (6, 'XL', 75.00),
 (29, 'سعر موحد', 36.00),
-(28, 'سعر موحد', 30.00);
+(28, 'سعر موحد', 30.00),
+(32, 'سعر موحد', 55.00);
 
 -- 4. جدول الإضافات الاختيارية (Item Add-ons Table)
 CREATE TABLE `item_addons` (
