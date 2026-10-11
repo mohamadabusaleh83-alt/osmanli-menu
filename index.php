@@ -110,23 +110,6 @@ $category_subtitles = [
 
   <link rel="stylesheet" href="style.css">
   <style>
-    .admin-access-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(212, 175, 55, 0.15);
-      border: 1px solid rgba(212, 175, 55, 0.4);
-      color: var(--color-gold-bright);
-      padding: 5px 12px;
-      border-radius: 20px;
-      text-decoration: none;
-      font-size: 0.82rem;
-      transition: all 0.2s;
-    }
-    .admin-access-badge:hover {
-      background: var(--color-gold);
-      color: #071712;
-    }
     .db-warning-banner {
       background: rgba(220, 53, 69, 0.2);
       border: 1px solid #dc3545;
@@ -496,12 +479,6 @@ $category_subtitles = [
         <p class="footer-since">ABU SEIR 1854 • نابلس</p>
         <p class="footer-quote">"خبرة تتناقلها الأجيال... من 1854 والحكاية مكملة"</p>
         <p class="footer-location"><i class="fa-solid fa-location-dot gold-icon"></i> <strong>نابلس - رفيديا - مقابل الأكاديمية</strong></p>
-        <div style="margin-top: 15px;">
-          <a href="login.php" class="admin-access-badge" title="بوابة إدارة المنيو للمشرفين">
-            <i class="fa-solid fa-lock"></i>
-            <span>لوحة تحكم المشرفين</span>
-          </a>
-        </div>
       </div>
 
       <div class="footer-contact">
